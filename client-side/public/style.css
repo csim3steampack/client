@@ -1,0 +1,96 @@
+* {
+	font-family: Ubuntu, Dosis, serif;
+}
+
+/**********************************
+				HEADER SECTIOM
+***********************************/
+.ground-nav {
+	height: 60px;
+	background-color: grey;
+	color: white;
+	line-height: 60px;
+}
+
+.nav-title {
+	font-size: 30px;
+	text-align: left;
+	padding-left: .5em;
+}
+
+.nav-title:visited, .nav-title:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.make-play {
+text-align: right;
+}
+
+
+/**********************************
+			GROUND-DISPLAY SECTIOM
+***********************************/
+.away-whole {
+margin-top: 1em;
+}
+
+.away-field {
+	border: 1px solid red;
+	height: 350px;
+}
+
+.home-field {
+	border: 1px solid red;
+	height: 350px;
+}
+
+.player {
+	border: 1px solid black;
+	width: 100px;
+	height: 50px;
+	display: inline-block;
+	font-size: 2em;
+}
+
+/**********************************
+			TEAM SECTIOM
+***********************************/
+.team-select {
+	border: 1px solid black;
+	height: 60px;
+	width: 250px;
+	text-align: center;
+}
+
+/**********************************
+			TEAMLIST SECTIOM
+***********************************/
+
+.home-search-div {
+	border: 1px solid black;
+	height: 5em;
+	width: 70%;
+	margin: auto;
+	text-align: left;
+	display: flex;
+}
+
+.search-div {
+	border: 1px solid red;
+	width: 45%;
+}
+
+.place-input {
+	width: 100%;
+	height: 2.5em;
+}
+
+.calendar-div {
+	border: 1px solid red;
+	width: 45%;
+}
+
+.button-div {
+	width: 10%;
+}
