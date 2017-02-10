@@ -3,7 +3,8 @@ import update from 'react-addons-update';
 
 const initialState = {
   status: 'INIT',
-  teamData: [],
+  teamNameData: [],
+  teamNameValue: '',
 };
 
 
@@ -16,11 +17,15 @@ export default function teamView(state = initialState, action) {
     case types.TEAM_VIEW_SUCCESS:
       return update(state, {
         status: { $set: 'SUCCESS' },
-        teamData: { $set: action.data },
+        teamNameData: { $set: action.data },
       });
     case types.TEAM_VIEW_FAILURE:
       return update(state, {
         status: { $set: 'FAILURE' },
+      });
+    case types.GROUND_VIEW_TEAMNAME:
+      return update(state, {
+        teamNameValue: { $set: action.teamName },
       });
     default:
       return state;

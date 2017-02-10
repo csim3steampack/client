@@ -4,12 +4,23 @@ import { Link } from 'react-router';
 
 class Team extends Component {
   render() {
+    // const teamFilter = (
+    //   if (this.props.location === this.props.teamData.location) {
+    //
+    //   }
+    // );
+
     return (
       <Container>
         <Row>
           <Col >
             <div className="team-select">
-              <Link to="/ground_display">{this.props.teamView}</Link>
+              <Link
+                to="/ground_display"
+                onClick={() => this.props.handleClick(this.props.teamData.team)}
+              >
+                {this.props.teamData.team}
+              </Link>
             </div>
           </Col>
         </Row>
@@ -19,7 +30,8 @@ class Team extends Component {
 }
 
 Team.propTypes = {
-  teamView: React.PropTypes.string,
+  teamData: React.PropTypes.any,
+  handleClick: React.PropTypes.func,
 };
 
 export default Team;
