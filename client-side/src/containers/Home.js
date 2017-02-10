@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TeamList } from '../components';
-import { teamViewRequest } from '../actions/teamView';
+import { teamViewRequest, groundViewTeamName } from '../actions/teamView';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    this.props.teamViewRequest();
   }
 
   render() {
     return (
       <div>
-        <TeamList />
+        <TeamList
+          teamData={this.props.leaderTeamData}
+          handleClick={this.props.groundViewTeamName}
+        />
       </div>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    leaderTeamData: state.teamView.teamNameData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    teamViewRequest: () => {
+      return dispatch(teamViewRequest());
+    },
+    groundViewTeamName: (teamName) => { dispatch(groundViewTeamName(teamName)); },
+  };
+};
+
+Home.propTypes = {
+  leaderTeamData: React.PropTypes.array,
+  teamViewRequest: React.PropTypes.func,
+  groundViewTeamName: React.PropTypes.func,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

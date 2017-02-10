@@ -4,10 +4,31 @@ import Team from './Team';
 
 
 class TeamList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    const nextState = {};
+    nextState[e.target.name] = e.target.value;
+    this.setState(nextState);
+  }
+
   render() {
     const teamDivDisplay = ((teamData) => {
-      return teamData.map((team, i) => {
-        return (<Team teamView={team} key={i} />);
+      return teamData.map((team) => {
+        return (
+          <Team
+            teamData={team}
+            key={team._id}
+            handleClick={this.props.handleClick}
+            location={this.state.location}
+          />
+        );
       });
     });
 
@@ -20,6 +41,7 @@ class TeamList extends Component {
             type="text"
             name="search"
             placeholder="City, Playground"
+            onChange={this.handleChange}
           />
         </div>
         <Form className="calendar-div">
@@ -38,18 +60,15 @@ class TeamList extends Component {
     return (
       <div>
         {searchForm}
-        {teamDivDisplay(this.props.teamName)}
+        {teamDivDisplay(this.props.teamData)}
       </div>
     );
   }
 }
 
 TeamList.propTypes = {
-  teamName: React.PropTypes.any,
-};
-
-TeamList.defaultProps = {
-  teamName: ['minho team', 'team A', 'team B', 'team C', 'team D'],
+  teamData: React.PropTypes.array,
+  handleClick: React.PropTypes.func,
 };
 
 export default TeamList;

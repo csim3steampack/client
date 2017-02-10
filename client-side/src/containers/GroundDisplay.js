@@ -8,29 +8,30 @@ class GroundDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      homeName: [],
-      awayName: [],
+      userMembers: '',
+      awayMembers: '',
     };
   }
 
   componentDidMount() {
-    this.props.groundDisplayRequest().then(
+    this.props.groundDisplayRequest()
+    .then(
       () => {
         const homeArray = [];
         const awayArray = [];
         for (let i = 0; i < this.props.teamMembers.length; i += 1) {
           const teamMembers = this.props.teamMembers;
-          if (teamMembers[i].team === '1') {
-            homeArray.push(teamMembers[i].name);
-          } else if (teamMembers[i].team === '2') {
-            awayArray.push(teamMembers[i].name);
+          if (teamMembers[i].team === this.props.teamPlayerName) {
+            awayArray.push(teamMembers[i]);
+          } else {
+            homeArray.push(teamMembers[i]);
           }
         }
 
-        this.setState({
-          homeName: homeArray,
-          awayName: awayArray,
-        });
+        this.setState = {
+          userMembers: homeArray,
+          awayMembers: awayArray,
+        };
       },
   );
   } // componentDidMount done here
@@ -38,7 +39,7 @@ class GroundDisplay extends Component {
   render() {
     return (
       <div>
-        <Ground homeName={this.state.homeName} awayName={this.state.awayName} />
+        <Ground homeName={this.state.userMembers} awayName={this.state.awayMembers} />
       </div>
     );
   }
@@ -47,6 +48,7 @@ class GroundDisplay extends Component {
 const mapStateToProps = (state) => {
   return {
     teamMembers: state.groundDisplay.teamData,
+    teamPlayerName: state.teamView.teamNameValue,
   };
 };
 
@@ -59,8 +61,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 GroundDisplay.propTypes = {
-  teamMembers: React.PropTypes.any,
+  teamMembers: React.PropTypes.array,
   groundDisplayRequest: React.PropTypes.func,
+  teamPlayerName: React.PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroundDisplay);
