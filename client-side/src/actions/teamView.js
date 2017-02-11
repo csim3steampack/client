@@ -14,10 +14,9 @@ export function teamViewSuccess(data) {
   };
 }
 
-export function teamViewFailure(error) {
+export function teamViewFailure() {
   return {
     type: TEAM_VIEW_FAILURE,
-    error,
   };
 }
 
@@ -28,8 +27,8 @@ export function teamViewRequest() {
     return axios.get(url).then((response) => {
       dispatch(teamViewSuccess(response.data));
     })
-    .catch((error) => {
-      dispatch(teamViewFailure(error));
+    .catch(() => {
+      dispatch(teamViewFailure());
     });
   };
 }

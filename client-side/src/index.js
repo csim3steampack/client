@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { App, GroundDisplay, Home } from './containers';
+import { App, GroundDisplay, Home, Login, Register } from './containers';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -18,6 +18,8 @@ ReactDOM.render(
         <IndexRoute component={Home} />
         <Route path="/Home" component={Home} />
         <Route path="/ground_display" component={GroundDisplay} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Route>
     </Router>
   </Provider>, rootElement);

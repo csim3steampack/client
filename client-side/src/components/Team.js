@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router';
 
+const propTypes = {
+  teamData: React.PropTypes.any,
+  handleClick: React.PropTypes.func,
+};
+
 class Team extends Component {
   render() {
     // const teamFilter = (
@@ -29,9 +34,6 @@ class Team extends Component {
   }
 }
 
-Team.propTypes = {
-  teamData: React.PropTypes.any,
-  handleClick: React.PropTypes.func,
-};
+Team.propTypes = propTypes;
 
 export default Team;

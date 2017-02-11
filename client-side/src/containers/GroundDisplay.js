@@ -3,18 +3,24 @@ import { connect } from 'react-redux';
 import { Ground } from '../components';
 import { groundDisplayRequest } from '../actions/groundDisplay';
 
+const propTypes = {
+  teamMembers: React.PropTypes.array,
+  groundDisplayRequest: React.PropTypes.func,
+  teamPlayerName: React.PropTypes.string,
+};
 
 class GroundDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userMembers: '',
-      awayMembers: '',
+      userMembers: [],
+      awayMembers: [],
     };
   }
 
   componentDidMount() {
-    this.props.groundDisplayRequest()
+    const component = this;
+    this.props.groundDisplayRequest(this.props.teamPlayerName)
     .then(
       () => {
         const homeArray = [];
@@ -22,19 +28,18 @@ class GroundDisplay extends Component {
         for (let i = 0; i < this.props.teamMembers.length; i += 1) {
           const teamMembers = this.props.teamMembers;
           if (teamMembers[i].team === this.props.teamPlayerName) {
-            awayArray.push(teamMembers[i]);
+            homeArray.push(teamMembers[i].name);
           } else {
-            homeArray.push(teamMembers[i]);
+            awayArray.push(teamMembers[i].name);
           }
         }
-
-        this.setState = {
+        component.setState({
           userMembers: homeArray,
           awayMembers: awayArray,
-        };
+        });
       },
   );
-  } // componentDidMount done here
+  }
 
   render() {
     return (
@@ -54,16 +59,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    groundDisplayRequest: () => {
-      return dispatch(groundDisplayRequest());
+    groundDisplayRequest: (tempTeam) => {
+      return dispatch(groundDisplayRequest(tempTeam));
     },
   };
 };
 
-GroundDisplay.propTypes = {
-  teamMembers: React.PropTypes.array,
-  groundDisplayRequest: React.PropTypes.func,
-  teamPlayerName: React.PropTypes.string,
-};
+GroundDisplay.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroundDisplay);
