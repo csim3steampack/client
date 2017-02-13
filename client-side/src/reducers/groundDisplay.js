@@ -8,7 +8,6 @@ const initialState = {
 
 
 export default function groundDisplay(state = initialState, action) {
-  console.log(action.status)
   switch (action.type) {
     case types.GROUND_DISPLAY:
       return update(state, {

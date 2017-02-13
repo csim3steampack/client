@@ -2,6 +2,11 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import React, { Component } from 'react';
 import Team from './Team';
 
+const propTypes = {
+  teamData: React.PropTypes.array,
+  handleClick: React.PropTypes.func,
+};
+
 
 class TeamList extends Component {
   constructor(props) {
@@ -66,9 +71,6 @@ class TeamList extends Component {
   }
 }
 
-TeamList.propTypes = {
-  teamData: React.PropTypes.array,
-  handleClick: React.PropTypes.func,
-};
+TeamList.propTypes = propTypes;
 
 export default TeamList;

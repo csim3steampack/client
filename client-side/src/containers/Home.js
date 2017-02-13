@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { TeamList } from '../components';
 import { teamViewRequest, groundViewTeamName } from '../actions/teamView';
 
+const propTypes = {
+  leaderTeamData: React.PropTypes.array,
+  teamViewRequest: React.PropTypes.func,
+  groundViewTeamName: React.PropTypes.func,
+};
+
 class Home extends Component {
   componentDidMount() {
     this.props.teamViewRequest();
@@ -35,10 +41,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-Home.propTypes = {
-  leaderTeamData: React.PropTypes.array,
-  teamViewRequest: React.PropTypes.func,
-  groundViewTeamName: React.PropTypes.func,
-};
+Home.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -94,3 +94,17 @@ margin-top: 1em;
 .button-div {
 	width: 10%;
 }
+
+/**********************************
+			LoginView SECTIOM
+***********************************/
+
+/*.auth-view-body {
+	background: url(./photo/nou_camp.jpg) no-repeat center center fixed;
+	background-size: cover;
+}*/
+
+.auth-div {
+	border: 1px solid black;
+	height: 300px;
+}
