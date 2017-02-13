@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 
+const propTypes = {
+  onRegister: React.PropTypes.func,
+};
 
 class RegisterView extends Component {
   constructor(props) {
@@ -8,15 +11,40 @@ class RegisterView extends Component {
     this.state = {
       id: '',
       password: '',
-      teamname: '',
+      email: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange(e) {
     const nextState = {};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
+  }
+
+  handleRegister() {
+    const id = this.state.id;
+    const password = this.state.password;
+
+    this.props.onRegister(id, password).then(
+      (result) => {
+        if (!result) {
+          this.setState({
+            id: '',
+            password: '',
+            email: '',
+          });
+        }
+      },
+    );
+  }
+
+  handleKeyPress(e) {
+    if (e.charCode === 13) {
+      this.handleRegister();
+    }
   }
 
   render() {
@@ -41,13 +69,14 @@ class RegisterView extends Component {
               value={this.state.password}
             />
             <input
-              name="teamname"
+              name="email"
               type="text"
-              placeholder="TEAM NAME"
+              placeholder="EMAIL ADDRESS"
               onChange={this.handleChange}
-              value={this.state.teamname}
+              value={this.state.email}
+              onKeyPress={this.handleKeyPress}
             />
-            <Button>REGISTER</Button>
+            <Button onClick={this.handleRegister}>REGISTER</Button>
           </Col>
           <Col sm="1" />
         </Row>
@@ -55,5 +84,7 @@ class RegisterView extends Component {
     );
   }
 }
+
+RegisterView.propTypes = propTypes;
 
 export default RegisterView;
