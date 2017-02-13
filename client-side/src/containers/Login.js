@@ -1,14 +1,41 @@
 import React, { Component } from 'react';
-import { LoginView } from '../components';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { loginRequest } from '../actions/authentication';
+import { LoginView } from '../components';
 
+const propTypes = {
+  loginRequest: React.PropTypes.func,
+  status: React.PropTypes.string,
+};
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(id, password) {
+    return this.props.loginRequest(id, password)
+    .then(() => {
+      if (this.props.status === 'SUCCESS') {
+        const loginData = {
+          isLoggedIn: true,
+          currentUserId: id,
+        };
+        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+        browserHistory.push('/');
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   render() {
     return (
       <div>
-        <LoginView />
+        <LoginView onLogin={this.handleLogin} />
       </div>
     );
   }
@@ -27,5 +54,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
+
+Login.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

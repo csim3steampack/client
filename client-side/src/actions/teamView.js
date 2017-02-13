@@ -1,5 +1,6 @@
-import { TEAM_VIEW, TEAM_VIEW_SUCCESS, TEAM_VIEW_FAILURE, GROUND_VIEW_TEAMNAME } from './ActionTypes';
 import axios from 'axios';
+import { TEAM_VIEW, TEAM_VIEW_SUCCESS, TEAM_VIEW_FAILURE, GROUND_VIEW_TEAMNAME } from './ActionTypes';
+
 
 export function teamView() {
   return {
