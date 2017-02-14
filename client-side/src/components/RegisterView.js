@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Input, FormFeedback, Label } from 'reactstrap';
 
 const propTypes = {
   onRegister: React.PropTypes.func,
@@ -48,19 +48,50 @@ class RegisterView extends Component {
   }
 
   render() {
+    /* USER ID SECTION */
+    const IdLength = this.state.id.length;
+
+    const userIDInitial = (
+      <Form>
+        <FormGroup>
+          <Label>User ID</Label>
+          <Input
+            name="id"
+            type="text"
+            value={this.state.id}
+            onChange={this.handleChange}
+          />
+          <FormFeedback>ID length should be 4~12</FormFeedback>
+        </FormGroup>
+      </Form>
+    );
+
+    const userIDSuccess = (
+      <Form>
+        <FormGroup color="success">
+          <Label>User ID</Label>
+          <Input
+            state="success"
+            name="id"
+            type="text"
+            value={this.state.id}
+            onChange={this.handleChange}
+          />
+          <FormFeedback>Success! You did it!</FormFeedback>
+        </FormGroup>
+      </Form>
+    );
+
+    /* PASSWORD SECTION */
+    
+
     return (
       <Container fluid className="auth-view-body">
         <Row>
           <Col sm="7" />
           <Col sm="4" className="auth-div">
-            Register for STEAMPACK
-          <input
-            name="id"
-            type="text"
-            placeholder="ID"
-            onChange={this.handleChange}
-            value={this.state.id}
-          />
+            <h3>Register</h3>
+            <div>{(IdLength > 3 && IdLength < 13) ? userIDSuccess : userIDInitial }</div>
             <input
               name="password"
               type="password"

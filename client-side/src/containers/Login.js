@@ -18,16 +18,10 @@ class Login extends Component {
     return this.props.loginRequest(id, password)
     .then(() => {
       if (this.props.status === 'SUCCESS') {
-        const loginData = {
-          isLoggedIn: true,
-          currentUserId: id,
-        };
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
         this.props.router.push('/');
         return true;
-      } else {
-        return false;
       }
+      return false;
     });
   }
 

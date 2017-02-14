@@ -31,8 +31,10 @@ export function loginRequest(id, password) {
     return axios.post(url, { id, password })
     .then((response) => {
       if (response.status === 200) {
+        console.log("login token check", response.data.token[id]);
+        let id_token = response.data.token[id];
+        localStorage.setItem('user_token', JSON.stringify(id_token));
         dispatch(loginSuccess(id));
-        localStorage.setItem('user_token', response.data.token);
       }
     }).catch(() => {
       dispatch(loginFailure());
@@ -114,11 +116,12 @@ export function getStatusRequest() {
   return (dispatch) => {
     dispatch(getStatus());
     const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/getinfo';
-    const userToken = localStorage.getItem('user_token');
-    return axios.post(url, {userToken})
+    const userToken = JSON.parse(localStorage.getItem('user_token'));
+    console.log("token id checking", userToken);
+    return axios.post(url, { 'userToken': userToken })
     .then((response) => {
-      console.log("token response@", response);
-      dispatch(getStatusSuccess(response.data));
+      console.log("token total response", response);
+      dispatch(getStatusSuccess(response.data.info));
     }).catch(() => {
       dispatch(getStatusFailure());
     });

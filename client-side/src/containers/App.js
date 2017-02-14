@@ -21,37 +21,20 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const getCookie = (name) => {
-      const value = '; ' + document.cookie;
-      const parts = value.split('; ' + name + '=');
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    };
-this.props.getStatusRequest();
-    /* loginData setup here */
-    let loginData = getCookie('key');
-    if (typeof loginData === 'undefined') {
-      return;
-    }
-    loginData = JSON.parse(atob(loginData));
-    if (!loginData.isLoggedIn) {
-      return;
-    }
-
-    /* userToken setup here */
-    const userToken = localStorage.getItem('user_token');
-    if (userToken === loginData.currentUserId) {
-      this.setState({
-        isLoggedIn: loginData.isLoggedIn,
-      });
-    } else {
-      loginData = {
-        isLoggedIn: false,
-        currentUserId: '',
-      };
-      document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-    }
+    this.props.getStatusRequest().then(
+      () => {
+        const userToken = JSON.parse(localStorage.getItem('user_token'));
+        if (this.props.status.valid && userToken.id === this.props.status.currentUserId) {
+          this.setState({
+            isLoggedIn: true,
+          });
+        } else {
+          this.setState({
+            isLoggedIn: false,
+          });
+        }
+      },
+    );
   }
 
 
@@ -59,12 +42,10 @@ this.props.getStatusRequest();
     this.props.logoutRequest().then(
       () => {
         alert("good bye");
-
-        const loginData = {
+        localStorage.removeItem('user_token');
+        this.setState({
           isLoggedIn: false,
-          currentUserId: '',
-        };
-        document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+        });
         this.props.router.push('/login');
       },
     );
