@@ -61,6 +61,13 @@ export default function authentication(state = initialState, action) {
           error: { $set: action.error },
         },
       });
+    case types.AUTH_LOGOUT:
+      return update(state, {
+        status: {
+          isLoggedIn: { $set: false },
+          currentUserId: { $set: '' },
+        },
+      });
     case types.AUTH_GET_STATUS:
       return update(state, {
         status: {
@@ -71,7 +78,7 @@ export default function authentication(state = initialState, action) {
       return update(state, {
         status: {
           valid: { $set: true },
-          currentUserId: { $set: action.userid },
+          currentUserId: { $set: action.userId },
         },
       });
     case types.AUTH_GET_STATUS_FAILURE:
@@ -79,13 +86,6 @@ export default function authentication(state = initialState, action) {
         status: {
           valid: { $set: false },
           isLoggedIn: { $set: false },
-        },
-      });
-    case types.AUTH_LOGOUT:
-      return update(state, {
-        status: {
-          isLoggedIn: { $set: false },
-          currentUserId: { $set: '' },
         },
       });
     default:

@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getStatusRequest, logoutRequest } from '../actions/authentication';
+import { logoutRequest, getStatusRequest } from '../actions/authentication';
 import { Header } from '../components';
 
 const propTypes = {
   children: React.PropTypes.any,
   status: React.PropTypes.object,
   getStatusRequest: React.PropTypes.func,
+  router: React.PropTypes.any,
+  logoutRequest: React.PropTypes.func,
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLoggedIn: this.props.status.isLoggedIn,
+    };
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-    console.log('hi');
+  componentWillMount() {
     const getCookie = (name) => {
       const value = '; ' + document.cookie;
       const parts = value.split('; ' + name + '=');
@@ -24,33 +28,32 @@ class App extends Component {
         return parts.pop().split(';').shift();
       }
     };
-
+this.props.getStatusRequest();
+    /* loginData setup here */
     let loginData = getCookie('key');
-
     if (typeof loginData === 'undefined') {
-      console.log("loginData is undefined")
       return;
     }
-
     loginData = JSON.parse(atob(loginData));
-
     if (!loginData.isLoggedIn) {
       return;
     }
 
-    this.props.getStatusRequest().then(
-      () => {
-        if (!this.props.status.valid) {
-          loginData = {
-            isLoggedIn: false,
-            currentUserId: '',
-          };
-          document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-          alert("have a problem");
-        }
-      }
-    );
+    /* userToken setup here */
+    const userToken = localStorage.getItem('user_token');
+    if (userToken === loginData.currentUserId) {
+      this.setState({
+        isLoggedIn: loginData.isLoggedIn,
+      });
+    } else {
+      loginData = {
+        isLoggedIn: false,
+        currentUserId: '',
+      };
+      document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+    }
   }
+
 
   handleLogout() {
     this.props.logoutRequest().then(
@@ -62,15 +65,15 @@ class App extends Component {
           currentUserId: '',
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+        this.props.router.push('/login');
       },
     );
   }
 
   render() {
-    const header = <Header onLogout={this.handleLogout} />;
     return (
       <div>
-        {this.props.status.isLoggedIn ? header : undefined }
+        <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
         {this.props.children}
       </div>
     );
@@ -86,11 +89,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStatusRequest: () => {
-      return dispatch(getStatusRequest());
-    },
     logoutRequest: () => {
       return dispatch(logoutRequest());
+    },
+    getStatusRequest: () => {
+      return dispatch(getStatusRequest());
     },
   };
 };

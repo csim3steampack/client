@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { loginRequest } from '../actions/authentication';
 import { LoginView } from '../components';
@@ -24,7 +23,7 @@ class Login extends Component {
           currentUserId: id,
         };
         document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-        browserHistory.push('/');
+        this.props.router.push('/');
         return true;
       } else {
         return false;
