@@ -31,9 +31,10 @@ export function loginRequest(id, password) {
     return axios.post(url, { id, password })
     .then((response) => {
       if (response.status === 200) {
-        console.log("login token check", response.data.token[id]);
-        let id_token = response.data.token[id];
+        console.log("login token check", response.data.tokenData[id]);
+        let id_token = response.data.tokenData[id];
         localStorage.setItem('user_token', JSON.stringify(id_token));
+        console.log("token checking", JSON.parse(localStorage.getItem('user_token')));
         dispatch(loginSuccess(id));
       }
     }).catch(() => {
@@ -70,6 +71,7 @@ export function registerRequest(id, password) {
     .then(() => {
       dispatch(registerSuccess());
     }).catch((error) => {
+      console.log("error@", error.response)
       dispatch(registerFailure(error.response.data.code));
     });
   };

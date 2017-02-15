@@ -7,11 +7,16 @@ import { registerRequest } from '../actions/authentication';
 const propTypes = {
   registerRequest: React.PropTypes.func,
   status: React.PropTypes.string,
+  router: React.PropTypes.any,
+  errorCode: React.PropTypes.number,
 };
 
 class Register extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      registerErrorCode: -1,
+    };
     this.handleRegister = this.handleRegister.bind(this);
   }
 
@@ -22,6 +27,9 @@ class Register extends Component {
           this.props.router.push('/login');
           return true;
         }
+        this.setState({
+          registerErrorCode: this.props.errorCode,
+        })
         return false;
       },
     );
@@ -30,7 +38,7 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <RegisterView onRegister={this.handleRegister} />
+        <RegisterView onRegister={this.handleRegister} errorCode={this.state.registerErrorCode} />
       </div>
     );
   }

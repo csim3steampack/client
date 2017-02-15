@@ -96,15 +96,51 @@ margin-top: 1em;
 }
 
 /**********************************
-			LoginView SECTIOM
+			Authentication SECTIOM
 ***********************************/
 
-/*.auth-view-body {
-	background: url(./photo/nou_camp.jpg) no-repeat center center fixed;
-	background-size: cover;
-}*/
+.auth-view-body {
+	/*background: url(./photo/real-madrid.jpg) no-repeat center center fixed;
+	background-size: cover;*/
+	/*background-color: lightgrey;*/
+}
+
+.warning-text {
+	color: red;
+}
 
 .auth-div {
-	border: 1px solid black;
-	height: 300px;
+	border: 1px solid grey;
+	border-radius: 10px;
+	margin-top: 5em;
+}
+
+.auth-title {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.auth-button {
+	margin-bottom: 1.5em;
+	width: 100%;
+}
+
+.auth-input {
+	width: 100%;
+}
+
+.auth-input-div {
+	margin-bottom: 2em;
+}
+
+.login-header {
+	display: inline-flex;
+	width: 100%;
+	position: relative;
+}
+
+.login-register-button {
+	height: 2.5em;
+	margin-top: 1.5em;
+	position: absolute;
 }

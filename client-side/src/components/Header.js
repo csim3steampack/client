@@ -4,8 +4,8 @@ import { Container, Row, Col } from 'reactstrap';
 
 class Header extends Component {
   render() {
-    const logout = "logtout";
-    const login = "login";
+    const logout = 'logtout';
+    const login = 'login';
     return (
       <div>
         <Container fluid>
@@ -13,7 +13,9 @@ class Header extends Component {
             <Col >
               <Link to="/home" className="nav-title">STEAMPACK</Link>
             </Col>
-            <Col className="make-play" onClick={this.props.onLogout}>{this.props.isLoggedIn ? logout : login} </Col>
+            <Col className="make-play" onClick={this.props.onLogout}>
+              {this.props.isLoggedIn ? logout : login}
+            </Col>
             <Col className="make-play">Game Register</Col>
           </Row>
         </Container>
