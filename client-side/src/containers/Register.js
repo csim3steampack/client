@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { RegisterView } from '../components';
 import { registerRequest } from '../actions/authentication';
 
@@ -20,7 +19,7 @@ class Register extends Component {
     return this.props.registerRequest(id, password).then(
       () => {
         if (this.props.status === 'SUCCESS') {
-          browserHistory.push('/login');
+          this.props.router.push('/login');
           return true;
         }
         return false;

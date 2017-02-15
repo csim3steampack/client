@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
          AUTH_REGISTER, AUTH_REGISTER_SUCCESS, AUTH_REGISTER_FAILURE,
-         AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS, AUTH_GET_STATUS_FAILURE, AUTH_LOGOUT } from './ActionTypes';
+         AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS, AUTH_GET_STATUS_FAILURE,
+         AUTH_LOGOUT } from './ActionTypes';
 
 /* LOGIN */
 export function login() {
@@ -29,8 +30,12 @@ export function loginRequest(id, password) {
     const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/login';
     return axios.post(url, { id, password })
     .then((response) => {
-      console.log(response)
-      dispatch(loginSuccess(id));
+      if (response.status === 200) {
+        console.log("login token check", response.data.token[id]);
+        let id_token = response.data.token[id];
+        localStorage.setItem('user_token', JSON.stringify(id_token));
+        dispatch(loginSuccess(id));
+      }
     }).catch(() => {
       dispatch(loginFailure());
     });
@@ -71,16 +76,33 @@ export function registerRequest(id, password) {
 }
 
 /* SESSION */
+export function logout() {
+  return {
+    type: AUTH_LOGOUT,
+  };
+}
+
+export function logoutRequest() {
+  return (dispatch) => {
+    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/logout';
+    return axios.post(url)
+    .then(() => {
+      dispatch(logout());
+    });
+  };
+}
+
+/* GET STATUS */
 export function getStatus() {
   return {
     type: AUTH_GET_STATUS,
   };
 }
 
-export function getStatusSuccess(userid) {
+export function getStatusSuccess(userId) {
   return {
     type: AUTH_GET_STATUS_SUCCESS,
-    userid,
+    userId,
   };
 }
 
@@ -94,29 +116,14 @@ export function getStatusRequest() {
   return (dispatch) => {
     dispatch(getStatus());
     const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/getinfo';
-    return axios.get(url)
+    const userToken = JSON.parse(localStorage.getItem('user_token'));
+    console.log("token id checking", userToken);
+    return axios.post(url, { 'userToken': userToken })
     .then((response) => {
-      console.log("response", response);
-      dispatch(getStatusSuccess(response.data.id));
+      console.log("token total response", response);
+      dispatch(getStatusSuccess(response.data.info));
     }).catch(() => {
       dispatch(getStatusFailure());
-    });
-  };
-}
-
-/* SESSION */
-export function logout() {
-  return {
-    type: AUTH_LOGOUT,
-  };
-}
-
-export function logoutRequest() {
-  return (dispatch) => {
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/logout';
-    return axios.post(url)
-    .then(() => {
-      dispatch(logout());
     });
   };
 }

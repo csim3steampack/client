@@ -14,12 +14,12 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="/Home" component={Home} />
         <Route path="/ground_display" component={GroundDisplay} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
       </Route>
     </Router>
   </Provider>, rootElement);
