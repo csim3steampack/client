@@ -4,6 +4,8 @@ import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
          AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS, AUTH_GET_STATUS_FAILURE,
          AUTH_LOGOUT } from './ActionTypes';
 
+const localStorage = window.localStorage;
+
 /* LOGIN */
 export function login() {
   return {
@@ -120,11 +122,12 @@ export function getStatusRequest() {
     const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/getinfo';
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     console.log("token id checking", userToken);
-    return axios.post(url, { 'userToken': userToken })
+    return axios.post(url, {'userToken': userToken })
     .then((response) => {
       console.log("token total response", response);
       dispatch(getStatusSuccess(response.data.info));
     }).catch(() => {
+      console.log("its failed")
       dispatch(getStatusFailure());
     });
   };

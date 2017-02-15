@@ -59,6 +59,7 @@ class LoginView extends Component {
           <Input
             name="id"
             type="text"
+            method="POST"
             value={this.state.id}
             onChange={this.handleChange}
           />
@@ -74,6 +75,7 @@ class LoginView extends Component {
           <Input
             state="success"
             name="id"
+            method="POST"
             type="text"
             value={this.state.id}
             onChange={this.handleChange}
@@ -94,8 +96,10 @@ class LoginView extends Component {
           <Input
             name="password"
             type="password"
+            method="POST"
             value={this.state.password}
             onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
           />
           {pwLength < 1 ? undefined : pwWarning}
         </FormGroup>
@@ -109,9 +113,11 @@ class LoginView extends Component {
           <Input
             state="success"
             name="password"
+            method="POST"
             type="password"
             value={this.state.password}
             onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
           />
           <FormFeedback>Success!</FormFeedback>
         </FormGroup>
@@ -135,12 +141,7 @@ class LoginView extends Component {
         <Row>
           <Col sm="7" />
           <Col sm="4" className="auth-div">
-            <div className="login-header">
-              <h3 className="auth-title">Login</h3>
-              <Link to="/register">
-                <Button color="info" className="login-register-button">not yet register?</Button>
-              </Link>
-            </div>
+            <h3 className="auth-title">Login</h3>
             <div className="auth-input-div">
               {(idLength > 3 && idLength < 13) ? userIDSuccess : userIDInitial }
             </div>
@@ -151,10 +152,12 @@ class LoginView extends Component {
               onClick={this.handleLogin}
               color="primary"
               className="auth-button"
-              onKeyPress={this.handleKeyPress}
             >
             LOGIN
           </Button>
+            <Link to="/register">
+              <Button color="info" className="auth-button">Not yet register?</Button>
+            </Link>
           </Col>
           <Col sm="1" />
         </Row>

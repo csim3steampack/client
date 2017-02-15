@@ -6,6 +6,7 @@ import { LoginView } from '../components';
 const propTypes = {
   loginRequest: React.PropTypes.func,
   status: React.PropTypes.string,
+  router: React.PropTypes.any,
 };
 
 class Login extends Component {
