@@ -13,7 +13,6 @@ const initialState = {
   status: {
     valid: false,
     isLoggedIn: true,
-    currentUserId: '',
   },
 };
 
@@ -78,8 +77,7 @@ export default function authentication(state = initialState, action) {
     case types.AUTH_GET_STATUS_SUCCESS:
       return update(state, {
         status: {
-          valid: { $set: true },
-          currentUserId: { $set: action.userId },
+          valid: { $set: action.valid },
         },
       });
     case types.AUTH_GET_STATUS_FAILURE:

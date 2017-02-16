@@ -6,6 +6,7 @@ import { gameRegisterRequest } from '../actions/gameRegister';
 const propTypes = {
   gameRegisterRequest: React.PropTypes.func,
   isSucceed: React.PropTypes.bool,
+  router: React.PropTypes.any,
 };
 
 
@@ -19,10 +20,11 @@ class GameRegister extends Component {
     return this.props.gameRegisterRequest(location, date, ground)
     .then(() => {
       if (this.props.isSucceed) {
+        this.props.router.push('/');
         return true;
       }
       return false;
-    })
+    });
   }
 
   render() {

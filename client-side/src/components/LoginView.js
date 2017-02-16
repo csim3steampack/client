@@ -43,6 +43,7 @@ class LoginView extends Component {
 
   handleKeyPress(e) {
     if (e.charCode === 13) {
+      e.preventDefault();
       this.handleLogin();
     }
   }
@@ -59,7 +60,6 @@ class LoginView extends Component {
           <Input
             name="id"
             type="text"
-            method="POST"
             value={this.state.id}
             onChange={this.handleChange}
           />
@@ -75,7 +75,6 @@ class LoginView extends Component {
           <Input
             state="success"
             name="id"
-            method="POST"
             type="text"
             value={this.state.id}
             onChange={this.handleChange}
@@ -96,7 +95,6 @@ class LoginView extends Component {
           <Input
             name="password"
             type="password"
-            method="POST"
             value={this.state.password}
             onChange={this.handleChange}
             onKeyPress={this.handleKeyPress}
@@ -113,7 +111,6 @@ class LoginView extends Component {
           <Input
             state="success"
             name="password"
-            method="POST"
             type="password"
             value={this.state.password}
             onChange={this.handleChange}

@@ -103,10 +103,10 @@ export function getStatus() {
   };
 }
 
-export function getStatusSuccess(userId) {
+export function getStatusSuccess(valid) {
   return {
     type: AUTH_GET_STATUS_SUCCESS,
-    userId,
+    valid,
   };
 }
 
@@ -125,7 +125,7 @@ export function getStatusRequest() {
     return axios.post(url, {'userToken': userToken })
     .then((response) => {
       console.log("token total response", response);
-      dispatch(getStatusSuccess(response.data.info));
+      dispatch(getStatusSuccess(response.data.success));
     }).catch(() => {
       console.log("its failed")
       dispatch(getStatusFailure());

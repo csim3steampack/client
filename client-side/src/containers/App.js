@@ -11,6 +11,7 @@ const propTypes = {
   getStatusRequest: React.PropTypes.func,
   router: React.PropTypes.any,
   logoutRequest: React.PropTypes.func,
+  isSucceed: React.PropTypes.bool,
 };
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    console.log("componentDidMount is checking")
+    console.log("componentWillMount is checking")
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     if (!userToken) {
       this.props.router.push('/login');
@@ -31,7 +32,7 @@ class App extends Component {
       console.log("getStatusRequest is working")
       this.props.getStatusRequest().then(
         () => {
-          if (this.props.status.valid && userToken.id === this.props.status.currentUserId) {
+          if (this.props.status.valid) {
             this.setState({
               isLoggedIn: true,
             });
@@ -48,7 +49,6 @@ class App extends Component {
   handleLogout() {
     this.props.logoutRequest().then(
       () => {
-        alert("good bye");
         localStorage.removeItem('user_token');
         this.setState({
           isLoggedIn: false,
@@ -59,7 +59,7 @@ class App extends Component {
 
   render() {
     const header = (
-      <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
+      <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} isSucceed={this.props.isSucceed}/>
     );
 
     const tokenChecker = JSON.parse(localStorage.getItem('user_token'));
@@ -77,6 +77,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     status: state.authentication.status,
+    isSucceed: state.gameRegister.isSucceed,
   };
 };
 
