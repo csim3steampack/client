@@ -5,11 +5,11 @@ const propTypes = {
 };
 
 class GameRegisterEdit extends Component {
-  render() {
-    return (
-      <div>GameRegisterEdit</div>
-    );
-  }
+	render() {
+		return (
+  <div>GameRegisterEdit</div>
+		);
+	}
 }
 
 GameRegisterEdit.propTypes = propTypes;

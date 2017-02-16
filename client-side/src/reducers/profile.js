@@ -4,29 +4,25 @@ import * as types from '../actions/ActionTypes';
 
 const initialState = {
 	status: 'INIT',
-	teamNameData: [],
-	teamNameValue: '',
+	profileIsSucceed: false,
 };
 
 
-export default function teamView(state = initialState, action) {
+export default function profile(state = initialState, action) {
 	switch (action.type) {
-	case types.TEAM_VIEW:
+	case types.PROFILE_VIEW:
 		return update(state, {
 			status: { $set: 'WAITING' },
 		});
-	case types.TEAM_VIEW_SUCCESS:
+	case types.PROFILE_VIEW_SUCCESS:
 		return update(state, {
 			status: { $set: 'SUCCESS' },
-			teamNameData: { $set: action.data },
+			profileIsSucceed: { $set: action.valid },
 		});
-	case types.TEAM_VIEW_FAILURE:
+	case types.PROFILE_VIEW_FAILURE:
 		return update(state, {
 			status: { $set: 'FAILURE' },
-		});
-	case types.GROUND_VIEW_TEAMNAME:
-		return update(state, {
-			teamNameValue: { $set: action.teamName },
+			profileIsSucceed: { $set: false },
 		});
 	default:
 		return state;

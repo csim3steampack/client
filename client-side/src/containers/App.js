@@ -15,81 +15,86 @@ const propTypes = {
 };
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: this.props.status.isLoggedIn,
-    };
-    this.handleLogout = this.handleLogout.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			isLoggedIn: this.props.status.isLoggedIn,
+		};
+		this.handleLogout = this.handleLogout.bind(this);
+	}
 
-  componentWillMount() {
-    console.log("componentWillMount is checking")
-    const userToken = JSON.parse(localStorage.getItem('user_token'));
-    if (!userToken) {
-      this.props.router.push('/login');
-    } else {
-      console.log("getStatusRequest is working")
-      this.props.getStatusRequest().then(
-        () => {
-          if (this.props.status.valid) {
-            this.setState({
-              isLoggedIn: true,
-            });
-          } else {
-            this.setState({
-              isLoggedIn: false,
-            });
-          }
-        },
+	componentWillMount() {
+		console.log("componentWillMount is checking")
+		const userToken = JSON.parse(localStorage.getItem('user_token'));
+		if (!userToken) {
+			this.props.router.push('/login');
+		} else {
+			console.log("getStatusRequest is working")
+			this.props.getStatusRequest().then(
+				() => {
+					if (this.props.status.valid) {
+						this.setState({
+							isLoggedIn: true,
+						});
+					} else {
+						this.setState({
+							isLoggedIn: false,
+						});
+					}
+				},
       );
-    }
-  }
+		}
+	}
 
-  handleLogout() {
-    this.props.logoutRequest().then(
+	handleLogout() {
+		this.props.logoutRequest().then(
       () => {
-        localStorage.removeItem('user_token');
-        this.setState({
-          isLoggedIn: false,
-        });
-      },
-    );
-  }
+	localStorage.removeItem('user_token');
+	this.setState({
+		isLoggedIn: false,
+	});
+},
+	);
+	}
 
-  render() {
-    const header = (
-      <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} isSucceed={this.props.isSucceed}/>
+	render() {
+		const header = (
+  <Header
+    onLogout={this.handleLogout}
+    isLoggedIn={this.state.isLoggedIn}
+    isSucceed={this.props.isSucceed}
+		/>
     );
 
-    const tokenChecker = JSON.parse(localStorage.getItem('user_token'));
+		const tokenChecker = JSON.parse(localStorage.getItem('user_token'));
 
-    return (
-      <div>
-        {tokenChecker === null ? undefined : header}
-        {this.props.children}
-      </div>
-    );
-  }
+		return (
+  <div>
+    {tokenChecker === null ? undefined : header}
+    {this.props.children}
+  </div>
+		);
+	}
 }
 
 
 const mapStateToProps = (state) => {
-  return {
-    status: state.authentication.status,
-    isSucceed: state.gameRegister.isSucceed,
-  };
+	return {
+		status: state.authentication.status,
+		isSucceed: state.gameRegister.isSucceed,
+		profileIsSucceed: state.profile.profileIsSucceed,
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    logoutRequest: () => {
-      return dispatch(logoutRequest());
-    },
-    getStatusRequest: () => {
-      return dispatch(getStatusRequest());
-    },
-  };
+	return {
+		logoutRequest: () => {
+			return dispatch(logoutRequest());
+		},
+		getStatusRequest: () => {
+			return dispatch(getStatusRequest());
+		},
+	};
 };
 
 App.propTypes = propTypes;

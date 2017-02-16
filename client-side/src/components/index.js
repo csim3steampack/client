@@ -5,3 +5,5 @@ export { default as LoginView } from './LoginView';
 export { default as RegisterView } from './RegisterView';
 export { default as GameRegisterView } from './GameRegisterView';
 export { default as GameRegisterEditView } from './GameRegisterEditView';
+export { default as ProfileView } from './ProfileView';
+export { default as ProfileEditView } from './ProfileEditView';

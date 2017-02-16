@@ -1,8 +1,10 @@
 {
   "extends" : "eslint-config-airbnb",
   "rules": {
-  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-},
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "indent": [2, "tab"],
+        "no-tabs": 0,
+  },
   "prefer-stateless-function": [<enabled>, { "ignorePureComponents": <ignorePureComponents> }]
 
 }
