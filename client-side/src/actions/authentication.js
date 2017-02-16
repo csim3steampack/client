@@ -4,6 +4,8 @@ import { AUTH_LOGIN, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILURE,
          AUTH_GET_STATUS, AUTH_GET_STATUS_SUCCESS, AUTH_GET_STATUS_FAILURE,
          AUTH_LOGOUT } from './ActionTypes';
 
+const localStorage = window.localStorage;
+
 /* LOGIN */
 export function login() {
   return {
@@ -31,9 +33,10 @@ export function loginRequest(id, password) {
     return axios.post(url, { id, password })
     .then((response) => {
       if (response.status === 200) {
-        console.log("login token check", response.data.token[id]);
-        let id_token = response.data.token[id];
+        console.log("login token check", response.data.tokenData[id]);
+        let id_token = response.data.tokenData[id];
         localStorage.setItem('user_token', JSON.stringify(id_token));
+        console.log("token checking", JSON.parse(localStorage.getItem('user_token')));
         dispatch(loginSuccess(id));
       }
     }).catch(() => {
@@ -70,6 +73,7 @@ export function registerRequest(id, password) {
     .then(() => {
       dispatch(registerSuccess());
     }).catch((error) => {
+      console.log("error@", error.response)
       dispatch(registerFailure(error.response.data.code));
     });
   };
@@ -118,11 +122,12 @@ export function getStatusRequest() {
     const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/getinfo';
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     console.log("token id checking", userToken);
-    return axios.post(url, { 'userToken': userToken })
+    return axios.post(url, {'userToken': userToken })
     .then((response) => {
       console.log("token total response", response);
       dispatch(getStatusSuccess(response.data.info));
     }).catch(() => {
+      console.log("its failed")
       dispatch(getStatusFailure());
     });
   };

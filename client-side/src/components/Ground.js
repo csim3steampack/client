@@ -7,6 +7,10 @@ const propTypes = {
 };
 
 class Ground extends Component {
+  onDrop(data) {
+      console.log(data)
+      // => banana
+  }
   render() {
     return (
       <div>

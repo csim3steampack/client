@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { logoutRequest, getStatusRequest } from '../actions/authentication';
 import { Header } from '../components';
 
+const localStorage = window.localStorage;
+
 const propTypes = {
   children: React.PropTypes.any,
   status: React.PropTypes.object,
@@ -21,22 +23,27 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.getStatusRequest().then(
-      () => {
-        const userToken = JSON.parse(localStorage.getItem('user_token'));
-        if (this.props.status.valid && userToken.id === this.props.status.currentUserId) {
-          this.setState({
-            isLoggedIn: true,
-          });
-        } else {
-          this.setState({
-            isLoggedIn: false,
-          });
-        }
-      },
-    );
+    console.log("componentDidMount is checking")
+    const userToken = JSON.parse(localStorage.getItem('user_token'));
+    if (!userToken) {
+      this.props.router.push('/login');
+    } else {
+      console.log("getStatusRequest is working")
+      this.props.getStatusRequest().then(
+        () => {
+          if (this.props.status.valid && userToken.id === this.props.status.currentUserId) {
+            this.setState({
+              isLoggedIn: true,
+            });
+          } else {
+            this.setState({
+              isLoggedIn: false,
+            });
+          }
+        },
+      );
+    }
   }
-
 
   handleLogout() {
     this.props.logoutRequest().then(
@@ -46,15 +53,20 @@ class App extends Component {
         this.setState({
           isLoggedIn: false,
         });
-        this.props.router.push('/login');
       },
     );
   }
 
   render() {
+    const header = (
+      <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
+    );
+
+    const tokenChecker = JSON.parse(localStorage.getItem('user_token'));
+
     return (
       <div>
-        <Header onLogout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
+        {tokenChecker === null ? undefined : header}
         {this.props.children}
       </div>
     );
