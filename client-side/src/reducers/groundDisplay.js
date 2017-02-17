@@ -4,12 +4,12 @@ import * as types from '../actions/ActionTypes';
 
 const initialState = {
 	status: 'INIT',
-	awayTeamData: [],
-	homeTeamData: [],
+	displayTeamData: {},
 };
 
 
 export default function groundDisplay(state = initialState, action) {
+	console.log(action)
 	switch (action.type) {
 	case types.GROUND_DISPLAY:
 		return update(state, {
@@ -18,8 +18,7 @@ export default function groundDisplay(state = initialState, action) {
 	case types.GROUND_DISPLAY_SUCCESS:
 		return update(state, {
 			status: { $set: 'SUCCESS' },
-			awayTeamData: { $set: action.awayUsers },
-			homeTeamData: { $set: action.homeUers },
+			displayTeamData: { $set: action.data },
 		});
 	case types.GROUND_DISPLAY_FAILURE:
 		return update(state, {

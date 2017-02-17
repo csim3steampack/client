@@ -17,7 +17,6 @@ const initialState = {
 };
 
 export default function authentication(state = initialState, action) {
-	console.log(action)
 	switch (action.type) {
 	case types.AUTH_LOGIN:
 		return update(state, {

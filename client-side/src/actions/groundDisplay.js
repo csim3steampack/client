@@ -9,11 +9,10 @@ export function groundDisplay() {
 	};
 }
 
-export function groundDisplaySuccess(awayUsers, homeUers) {
+export function groundDisplaySuccess(data) {
 	return {
 		type: GROUND_DISPLAY_SUCCESS,
-		awayUsers,
-		homeUers,
+		data,
 	};
 }
 
@@ -28,17 +27,20 @@ export function groundDisplayRequest(awayTeam) {
 		dispatch(groundDisplay());
 		const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/ground_display';
 		const userToken = JSON.parse(localStorage.getItem('user_token'));
-		console.log("awayTeam", awayTeam);
 		return axios.post(url, {
 			selectedTeam: awayTeam,
 			'userToken': userToken,
 		}).then((response) => {
 			console.log("groundDisplay response", response);
-			dispatch(groundDisplaySuccess(response.data.awayUsers, response.data.homeUers));
+			if (response.status === 200) {
+				dispatch(groundDisplaySuccess(response.data));
+			}
 		})
     .catch((error) => {
-			console.log("groundDisplay error@", error.response);
-	dispatch(groundDisplayFailure());
+	console.log("groundDisplay error@", error.response);
+	if (error.response !== undefined) {
+		dispatch(groundDisplayFailure(error.response));
+	}
 });
 	};
 }

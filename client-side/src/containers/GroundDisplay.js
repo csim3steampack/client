@@ -4,9 +4,9 @@ import { Ground } from '../components';
 import { groundDisplayRequest } from '../actions/groundDisplay';
 
 const propTypes = {
-	teamMembers: React.PropTypes.array,
 	groundDisplayRequest: React.PropTypes.func,
 	teamPlayerName: React.PropTypes.string,
+	displayTeamData: React.PropTypes.object,
 };
 
 class GroundDisplay extends Component {
@@ -19,53 +19,32 @@ class GroundDisplay extends Component {
 	}
 
 	componentDidMount() {
-		const component = this;
-		this.props.groundDisplayRequest(this.props.teamPlayerName)
-    .then(
-      () => {
-	const homeArray = [];
-	const awayArray = [];
-
-	for (let i = 0; i < this.props.teamMembers.length; i += 1) {
-		const teamMembers = this.props.teamMembers;
-		if (teamMembers[i].team === this.props.teamPlayerName) {
-			homeArray.push(teamMembers[i].name);
-		} else {
-			awayArray.push(teamMembers[i].name);
-		}
-	}
-	component.setState({
-		userMembers: homeArray,
-		awayMembers: awayArray,
-	});
-},
-  );
+		this.props.groundDisplayRequest(this.props.teamPlayerName);
 	}
 
 	render() {
+		const {
+			homeUsers,
+			awayUsers,
+		} = this.props.allDisplayTeam;
+		const homeName = homeUsers ? homeUsers.map(homeUser => homeUser.username) : [];
+		const awayName = awayUsers ? awayUsers.map(awayUser => awayUser.name) : [];
 		return (
-  <div>
-    <Ground homeName={this.props.homeTeamMembers} awayName={this.props.awayTeamMembers} />
-  </div>
+			<div>
+    		<Ground homeName={homeName} awayName={awayName} />
+			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		awayTeamMembers: state.groundDisplay.awayTeamData,
-		homeTeamMembers: state.groundDisplay.homeTeamData,
-		teamPlayerName: state.teamView.teamNameValue,
-	};
-};
+const mapStateToProps = state => ({
+	allDisplayTeam: state.groundDisplay.displayTeamData,
+	teamPlayerName: state.teamView.teamNameValue,
+});
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		groundDisplayRequest: (tempTeam) => {
-			return dispatch(groundDisplayRequest(tempTeam));
-		},
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	groundDisplayRequest: selectedTeam => dispatch(groundDisplayRequest(selectedTeam)),
+});
 
 GroundDisplay.propTypes = propTypes;
 
