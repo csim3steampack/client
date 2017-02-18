@@ -34,3 +34,6 @@ component.setState({
 },
 );
 }
+
+
+//id, username, team, position, learder, height, foot

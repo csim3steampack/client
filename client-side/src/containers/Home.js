@@ -4,42 +4,36 @@ import { TeamList } from '../components';
 import { teamViewRequest, groundViewTeamName } from '../actions/teamView';
 
 const propTypes = {
-	leaderTeamData: React.PropTypes.array,
-	teamViewRequest: React.PropTypes.func,
-	groundViewTeamName: React.PropTypes.func,
+  leaderTeamData: React.PropTypes.array,
+  teamViewRequest: React.PropTypes.func,
+  groundViewTeamName: React.PropTypes.func,
 };
 
 class Home extends Component {
-	componentDidMount() {
-		this.props.teamViewRequest();
-	}
+  componentDidMount() {
+    this.props.teamViewRequest();
+  }
 
-	render() {
-		return (
-  <div>
-    <TeamList
-      teamData={this.props.leaderTeamData}
-      handleClick={this.props.groundViewTeamName}
-    />
-  </div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <TeamList
+          teamData={this.props.leaderTeamData}
+          handleClick={this.props.groundViewTeamName}
+        />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-	return {
-		leaderTeamData: state.teamView.teamNameData,
-	};
-};
+const mapStateToProps = state => ({
+  leaderTeamData: state.teamView.teamNameData,
+});
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		teamViewRequest: () => {
-			return dispatch(teamViewRequest());
-		},
-		groundViewTeamName: (teamName) => { dispatch(groundViewTeamName(teamName)); },
-	};
-};
+const mapDispatchToProps = dispatch => ({
+  teamViewRequest: () => dispatch(teamViewRequest()),
+  groundViewTeamName: (teamName) => { dispatch(groundViewTeamName(teamName)); },
+});
 
 Home.propTypes = propTypes;
 

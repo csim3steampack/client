@@ -6,13 +6,13 @@ const propTypes = {
 };
 
 class GameRegisterEdit extends Component {
-	render() {
-		return (
-  <div>
-    <GameRegisterEditView />
-  </div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <GameRegisterEditView />
+      </div>
+    );
+  }
 }
 
 GameRegisterEdit.propTypes = propTypes;

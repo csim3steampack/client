@@ -1,57 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ProfileView, ProfileEditView } from '../components';
-import { profileViewRequest } from '../actions/profile';
+import { profileViewRequest, profileCheckRequest } from '../actions/profile';
 
 
 const propTypes = {
-	profileViewRequest: React.PropTypes.func,
-	status: React.PropTypes.string,
-	profileIsSucceed: React.PropTypes.bool,
+  profileViewRequest: React.PropTypes.func,
+  status: React.PropTypes.string,
+  profileCheckRequest: React.PropTypes.func,
+  currentUsername: React.PropTypes.string,
+  allProfileData: React.PropTypes.object,
 };
 
 class Profile extends Component {
-	constructor(props) {
-		super(props);
-		this.handleProfile = this.handleProfile.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.handleProfile = this.handleProfile.bind(this);
+  }
 
-	handleProfile(name, teamName, position, leader, height, foot) {
-		return this.props.profileViewRequest(name, teamName, position, leader, height, foot).then(
-			() => {
-				if (this.props.status === 'SUCCESS') {
-					return true;
-				}
-				return false;
-			});
-	}
+  componentDidMount() {
+    this.props.profileCheckRequest();
+  }
 
-	render() {
-		const initialProfile = <ProfileView onProfile={this.handleProfile} />;
-		const registedProfile = <ProfileEditView />;
+  handleProfile(name, teamName, position, leader, height, foot) {
+    return this.props.profileViewRequest(name, teamName, position, leader, height, foot).then(
+      () => {
+        if (this.props.status === 'SUCCESS') {
+          this.props.profileCheckRequest();
+          return true;
+        }
+        return false;
+      });
+  }
 
-		return (
-  <div>
-    {this.props.profileIsSucceed ? registedProfile : initialProfile}
-  </div>
-		);
-	}
+  render() {
+    const initialProfile = <ProfileView onProfile={this.handleProfile} />;
+    const profileEditView = (
+      <ProfileEditView allProfileData={this.props.allProfileData} onProfile={this.handleProfile} />
+    );
+
+    return (
+      <div>
+        {!this.props.currentUsername ? initialProfile : profileEditView}
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-	return {
-		profileIsSucceed: state.profile.profileIsSucceed,
-		status: state.profile.status,
-	};
-};
+const mapStateToProps = state => ({
+  status: state.profile.status,
+  currentUsername: state.profile.currentUsername,
+  allProfileData: state.profile.allProfileData,
+});
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		profileViewRequest: (name, teamName, position, leader, height, foot) => {
-			return dispatch(profileViewRequest(name, teamName, position, leader, height, foot));
-		},
-	};
-};
+const mapDispatchToProps = dispatch => ({
+  profileViewRequest: (name, teamName, position, leader, height, foot) =>
+    dispatch(profileViewRequest(name, teamName, position, leader, height, foot)),
+  profileCheckRequest: () => dispatch(profileCheckRequest()),
+});
 
 Profile.propTypes = propTypes;
 
