@@ -1,5 +1,10 @@
+@font-face {
+	font-family: "BMDOHYEON";
+	src: url('./font/BMDOHYEON_otf.otf');
+}
+
 * {
-	font-family: Ubuntu, Dosis, serif;
+	font-family: BMDOHYEON, Ubuntu, Dosis, serif;
 }
 
 /**********************************
@@ -135,4 +140,19 @@ margin-top: 1em;
 
 .test-game {
 	margin-bottom: 3em;
+}
+
+
+/**********************************
+			PROFILEVIEW SECTIOM
+***********************************/
+
+.profileView-container {
+	border: 1px solid grey;
+}
+
+.profileView-header {
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
