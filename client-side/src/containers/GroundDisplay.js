@@ -12,6 +12,7 @@ const propTypes = {
 class GroundDisplay extends Component {
 
   componentDidMount() {
+    console.log("GroundDisplay didmount")
     this.props.groundDisplayRequest(this.props.teamPlayerName);
   }
 

@@ -15,6 +15,10 @@ class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
+  componentDidMount() {
+    console.log("LOGIN didmount");
+  }
+
   handleLogin(id, password) {
     return this.props.loginRequest(id, password)
     .then(() => {

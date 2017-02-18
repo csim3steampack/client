@@ -20,6 +20,10 @@ class Register extends Component {
     this.handleRegister = this.handleRegister.bind(this);
   }
 
+  componentDidMount() {
+    console.log("REGISTER didmount");
+  }
+
   handleRegister(id, password) {
     return this.props.registerRequest(id, password).then(
       () => {
