@@ -6,5 +6,5 @@ import gameRegister from './gameRegister';
 import profile from './profile';
 
 export default combineReducers({
-	groundDisplay, teamView, authentication, gameRegister, profile,
+  groundDisplay, teamView, authentication, gameRegister, profile,
 });

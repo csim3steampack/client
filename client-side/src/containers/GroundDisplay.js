@@ -4,46 +4,33 @@ import { Ground } from '../components';
 import { groundDisplayRequest } from '../actions/groundDisplay';
 
 const propTypes = {
-	groundDisplayRequest: React.PropTypes.func,
-	teamPlayerName: React.PropTypes.string,
-	displayTeamData: React.PropTypes.object,
+  groundDisplayRequest: React.PropTypes.func,
+  teamPlayerName: React.PropTypes.string,
+  allDisplayTeam: React.PropTypes.object,
 };
 
 class GroundDisplay extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			userMembers: [],
-			awayMembers: [],
-		};
-	}
 
-	componentDidMount() {
-		this.props.groundDisplayRequest(this.props.teamPlayerName);
-	}
+  componentDidMount() {
+    this.props.groundDisplayRequest(this.props.teamPlayerName);
+  }
 
-	render() {
-		const {
-			homeUsers,
-			awayUsers,
-		} = this.props.allDisplayTeam;
-		const homeName = homeUsers ? homeUsers.map(homeUser => homeUser.username) : [];
-		const awayName = awayUsers ? awayUsers.map(awayUser => awayUser.name) : [];
-		return (
-			<div>
-    		<Ground homeName={homeName} awayName={awayName} />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <Ground allDisplayTeam={this.props.allDisplayTeam} />
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-	allDisplayTeam: state.groundDisplay.displayTeamData,
-	teamPlayerName: state.teamView.teamNameValue,
+  allDisplayTeam: state.groundDisplay.displayTeamData,
+  teamPlayerName: state.teamView.teamNameValue,
 });
 
 const mapDispatchToProps = dispatch => ({
-	groundDisplayRequest: selectedTeam => dispatch(groundDisplayRequest(selectedTeam)),
+  groundDisplayRequest: selectedTeam => dispatch(groundDisplayRequest(selectedTeam)),
 });
 
 GroundDisplay.propTypes = propTypes;
