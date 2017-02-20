@@ -5,6 +5,10 @@ const propTypes = {
   allDisplayTeam: React.PropTypes.object,
 };
 
+const defaultProps = {
+  allDisplayTeam: {},
+};
+
 class Ground extends Component {
   render() {
     const {
@@ -37,5 +41,6 @@ class Ground extends Component {
 }
 
 Ground.propTypes = propTypes;
+Ground.defaultProps = defaultProps;
 
 export default Ground;

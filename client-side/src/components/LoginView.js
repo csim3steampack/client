@@ -6,6 +6,10 @@ const propTypes = {
   onLogin: React.PropTypes.func,
 };
 
+const defaultProps = {
+  onLogin: () => console.log('onLogin is not a defined'),
+};
+
 class LoginView extends Component {
   constructor(props) {
     super(props);
@@ -164,5 +168,6 @@ class LoginView extends Component {
 }
 
 LoginView.propTypes = propTypes;
+LoginView.defaultProps = defaultProps;
 
 export default LoginView;

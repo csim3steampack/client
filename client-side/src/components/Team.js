@@ -3,8 +3,13 @@ import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router';
 
 const propTypes = {
-  teamData: React.PropTypes.any,
+  teamData: React.PropTypes.object,
   handleClick: React.PropTypes.func,
+};
+
+const defaultProps = {
+  teamData: {},
+  handleClick: () => console.log('handleClick function is not a defined'),
 };
 
 class Team extends Component {
@@ -35,5 +40,6 @@ class Team extends Component {
 }
 
 Team.propTypes = propTypes;
+Team.defaultProps = defaultProps;
 
 export default Team;

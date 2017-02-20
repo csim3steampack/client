@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PROFILE_VIEW, PROFILE_VIEW_SUCCESS, PROFILE_VIEW_FAILURE,
          PROFILE_CHECK_SUCCESS, PROFILE_CHECK_FAILURE,
-         PROFILE_PHOTO, PROFILE_PHOTO_SUCCESS, PROFILE_PHOTO_FAILURE } from './ActionTypes';
+         PROFILE_PHOTO } from './ActionTypes';
 
 const localStorage = window.localStorage;
 
@@ -96,37 +96,22 @@ export function profilePhoto() {
   };
 }
 
-export function profilePhotoSuccess() {
-  return {
-    type: PROFILE_PHOTO_SUCCESS,
-  };
-}
-
-export function profilePhotoFailure() {
-  return {
-    type: PROFILE_PHOTO_FAILURE,
-  };
-}
-
-export function profilePhotoRequest(photoUrl) {
-  return (dispatch) => {
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/user/upload';
-    const userToken = JSON.parse(localStorage.getItem('user_token'));
-    dispatch(profilePhoto());
-    return axios.post(url, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      photoUrl,
+export function profilePhotoRequest(photoData) {
+  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/user/upload';
+  const userToken = localStorage.getItem('user_token');
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
       userToken,
-    }).then((response) => {
+    },
+  };
+
+  return (dispatch) => {
+    return axios.post(url, photoData, config).then((response) => {
       if (response.status === 200) {
-        console.log("profile photo check", response.data)
-        dispatch(profilePhotoSuccess());
+        console.log('profile photo check', response.data);
+        dispatch(profilePhoto());
       }
-    })
-    .catch(() => {
-      dispatch(profilePhotoFailure());
     });
   };
 }

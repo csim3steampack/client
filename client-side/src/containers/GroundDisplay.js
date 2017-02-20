@@ -9,10 +9,15 @@ const propTypes = {
   allDisplayTeam: React.PropTypes.object,
 };
 
+const defaultProps = {
+  groundDisplayRequest: () => console.log('groundDisplayRequest function is not a defined'),
+  teamPlayerName: undefined,
+  allDisplayTeam: {},
+};
+
 class GroundDisplay extends Component {
 
   componentDidMount() {
-    console.log("GroundDisplay didmount")
     this.props.groundDisplayRequest(this.props.teamPlayerName);
   }
 
@@ -35,5 +40,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 GroundDisplay.propTypes = propTypes;
+GroundDisplay.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroundDisplay);

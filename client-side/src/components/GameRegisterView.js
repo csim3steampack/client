@@ -4,6 +4,10 @@ const propTypes = {
   onGameRegister: React.PropTypes.func,
 };
 
+const defaultProps = {
+  onGameRegister: () => console.log('onGameRegister function is not a defined'),
+};
+
 class GameRegisterView extends Component {
   constructor(props) {
     super(props);
@@ -75,5 +79,6 @@ class GameRegisterView extends Component {
 }
 
 GameRegisterView.propTypes = propTypes;
+GameRegisterView.defaultProps = defaultProps;
 
 export default GameRegisterView;
