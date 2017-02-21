@@ -16,7 +16,7 @@ class Ground extends Component {
       awayUsers,
     } = this.props.allDisplayTeam;
     const homeName = homeUsers ? homeUsers.map(homeUser => homeUser.username) : [];
-    const awayName = awayUsers ? awayUsers.map(awayUser => awayUser.name) : [];
+    const awayName = awayUsers ? awayUsers.map(awayUser => awayUser.username) : [];
     return (
       <div>
         <Container fluid className="ground">

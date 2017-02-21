@@ -89,7 +89,7 @@ class ProfileView extends Component {
 
     return (
       <Container>
-        <h3 className="profileView-header">프로필 등록</h3>
+        <h4 className="profileView-header">프로필 등록</h4>
         <Row>
           <Col md="1" />
           <Col md="10" className="profileView-container">
@@ -240,8 +240,7 @@ class ProfileView extends Component {
                 <Button
                   color="primary"
                   block
-                  outline
-                  onClick={this.handleProfileSave}
+                  onClick={this.handleProfile}
                   className="profile-save-button"
                 >저장하기</Button>
               </Col>
