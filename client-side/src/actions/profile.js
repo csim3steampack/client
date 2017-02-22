@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { PROFILE_VIEW, PROFILE_VIEW_SUCCESS, PROFILE_VIEW_FAILURE,
-         PROFILE_CHECK_SUCCESS, PROFILE_CHECK_FAILURE } from './ActionTypes';
+         PROFILE_CHECK_SUCCESS, PROFILE_CHECK_FAILURE,
+         PROFILE_PHOTO, PROFILE_PHOTO_SUCCESS, PROFILE_PHOTO_FAILURE } from './ActionTypes';
 
 const localStorage = window.localStorage;
 
+/* PROFILE VIEW SECTION */
 export function profileView() {
   return {
     type: PROFILE_VIEW,
@@ -54,6 +56,7 @@ export function profileViewRequest(
   };
 }
 
+/* PROFILE CHECK SECTION */
 export function profileCheckSuccess(currentUsername, allProfileData) {
   return {
     type: PROFILE_CHECK_SUCCESS,
@@ -84,4 +87,46 @@ export function profileCheckRequest() {
       console.log('profile check error@', error.response);
       dispatch(profileCheckFailure());
     });
+}
+
+/* PROFILE PHOTO SECTION */
+export function profilePhoto() {
+  return {
+    type: PROFILE_PHOTO,
+  };
+}
+
+export function profilePhotoSuccess() {
+  return {
+    type: PROFILE_PHOTO_SUCCESS,
+  };
+}
+
+export function profilePhotoFailure() {
+  return {
+    type: PROFILE_PHOTO_FAILURE,
+  };
+}
+
+export function profilePhotoRequest(photoUrl) {
+  return (dispatch) => {
+    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/user/upload';
+    const userToken = JSON.parse(localStorage.getItem('user_token'));
+    dispatch(profilePhoto());
+    return axios.post(url, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      photoUrl,
+      userToken,
+    }).then((response) => {
+      if (response.status === 200) {
+        console.log("profile photo check", response.data)
+        dispatch(profilePhotoSuccess());
+      }
+    })
+    .catch(() => {
+      dispatch(profilePhotoFailure());
+    });
+  };
 }

@@ -16,6 +16,10 @@ class GameRegister extends Component {
     this.handleGameRegister = this.handleGameRegister.bind(this);
   }
 
+  componentDidMount() {
+    console.log("GAMEREGISTER didmount")
+  }
+
   handleGameRegister(location, date, ground) {
     return this.props.gameRegisterRequest(location, date, ground)
     .then(() => {

@@ -21,6 +21,7 @@ class App extends Component {
   }
 
   componentWillMount() {
+    console.log("APP willmount");
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     if (userToken) {
       this.props.getStatusRequest();

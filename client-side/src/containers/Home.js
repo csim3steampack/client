@@ -11,6 +11,7 @@ const propTypes = {
 
 class Home extends Component {
   componentDidMount() {
+    console.log("HOME didmount")
     this.props.teamViewRequest();
   }
 

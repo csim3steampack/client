@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 const propTypes = {
   allProfileData: React.PropTypes.object,
   onProfile: React.PropTypes.func,
+  onProfilePhoto: React.PropTypes.func,
 };
 
 class ProfileEditView extends Component {
@@ -12,16 +13,26 @@ class ProfileEditView extends Component {
     const profileAlldata = this.props.allProfileData;
     this.state = {
       isEdit: false,
+      id: profileAlldata.id,
       name: profileAlldata.username,
       teamName: profileAlldata.team,
       position: profileAlldata.position,
       leaderState: profileAlldata.leader,
       height: profileAlldata.height,
       foot: profileAlldata.foot,
+      fileValue: '',
+      imagePreviewUrl: '',
     };
     this.handleProfileEdit = this.handleProfileEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleProfileSave = this.handleProfileSave.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
+    this.handleTrigger = this.handleTrigger.bind(this);
+    this.handleProfilePhoto = this.handleProfilePhoto.bind(this);
+  }
+
+  handleTrigger() {
+    this.trigger.click();
   }
 
   handleProfileEdit() {
@@ -48,6 +59,25 @@ class ProfileEditView extends Component {
     this.setState({
       isEdit: false,
     });
+  }
+
+  handleImageChange(e) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onload = () => {
+      console.log(reader.result)
+      this.setState({
+        fileValue: file,
+        imagePreviewUrl: reader.result,
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  handleProfilePhoto() {
+    const photoUrl = this.state.imagePreviewUrl;
+    this.props.onProfilePhoto(photoUrl);
   }
 
   render() {
@@ -80,6 +110,11 @@ class ProfileEditView extends Component {
       </Container>
     );
 
+
+    const imagePreview = (
+      (this.state.imagePreviewUrl) ? <img src={this.state.imagePreviewUrl} /> : <div>Please select an Imgage</div>
+    );
+
     const profileEditView = (
       <Container>
         <h3 className="profileView-header">프로필 수정</h3>
@@ -87,8 +122,19 @@ class ProfileEditView extends Component {
           <Col sm="1" />
           <Col sm="10" className="profileView-container">
             <div>User ID</div>
-            <div>minho</div>
-            <input type="file" />
+            <div>{this.state.id}</div>
+            <div>프로필 사진</div>
+            <form encType="multipart/form-data">
+              <input
+                type="file"
+                className="fileInput"
+                multiple
+                onChange={this.handleImageChange}
+                ref={(input) => { this.trigger = input; }}
+              />
+              <div className="imgPreview" onClick={this.handleTrigger}>{imagePreview}</div>
+              <div onClick={this.handleProfilePhoto}>submit</div>
+            </form>
             <div>Username</div>
             <input
               name="name"

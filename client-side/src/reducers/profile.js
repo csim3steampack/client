@@ -6,6 +6,7 @@ const initialState = {
   status: 'INIT',
   currentUsername: 'defaultName',
   allProfileData: {},
+  profilePhotoStatus: 'INIT',
 };
 
 
@@ -32,6 +33,18 @@ export default function profile(state = initialState, action) {
       return update(state, {
         currentUsername: { $set: '' },
         allProfileData: { $set: '' },
+      });
+    case types.PROFILE_PHOTO:
+      return update(state, {
+        profilePhotoStatus: { $set: 'WAITING' },
+      });
+    case types.PROFILE_PHOTO_SUCCESS:
+      return update(state, {
+        profilePhotoStatus: { $set: 'SUCCESS' },
+      });
+    case types.PROFILE_PHOTO_FAILURE:
+      return update(state, {
+        profilePhotoStatus: { $set: 'FAILURE' },
       });
     default:
       return state;
