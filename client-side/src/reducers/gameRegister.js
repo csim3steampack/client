@@ -5,6 +5,7 @@ import * as types from '../actions/ActionTypes';
 const initialState = {
   status: 'INIT',
   isSucceed: false,
+  gameRegisterPhotoStatus: 'INIT',
 };
 
 export default function gameRegister(state = initialState, action) {
@@ -17,6 +18,10 @@ export default function gameRegister(state = initialState, action) {
       return update(state, {
         status: { $set: 'SUCCESS' },
         isSucceed: { $set: action.bool },
+      });
+    case types.GAME_REGISTER_PHOTO:
+      return update(state, {
+        gameRegisterPhotoStatus: { $set: 'SUCCESS' },
       });
     default:
       return state;

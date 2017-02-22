@@ -86,7 +86,7 @@ class ProfileEditView extends Component {
 
     const profileCheckView = (
       <Container>
-        <h3 className="profileView-header">프로필 관리</h3>
+        <h4 className="profileView-header">프로필 관리</h4>
         <Row>
           <Col md="1" />
           <Col md="10" className="profileView-container">
@@ -115,22 +115,24 @@ class ProfileEditView extends Component {
                 <div>{profileAlldata.position === 'GK' ? '골키퍼' : undefined}</div>
 
                 <div className="profileCheckView-title">리더 여부</div>
-                <div>{profileAlldata.leader === 1 ? '팀 리더' : '멤버'}</div>
+                <div>{profileAlldata.leader === '1' ? '팀 리더' : '멤버'}</div>
 
                 <div className="profileCheckView-title">주 사용발</div>
                 <div>{profileAlldata.foot === 'right' ? '오른발' : undefined}</div>
                 <div>{profileAlldata.foot === 'left' ? '왼발' : undefined}</div>
                 <div>{profileAlldata.foot === 'both' ? '양발 사용' : undefined}</div>
-
-                <Button
-                  color="primary"
-                  block
-                  outline
-                  onClick={this.handleProfileEdit}
-                  className="profile-save-button"
-                >수정하기</Button>
               </Col>
             </Row>
+          </Col>
+          <Col md="1" />
+        </Row>
+        <Row>
+          <Col md="1" />
+          <Col md="10" className="gameRegister-button-box">
+            <button
+              onClick={this.handleProfileEdit}
+              className="gameRegister-button"
+            >수정하기</button>
           </Col>
           <Col md="1" />
         </Row>
@@ -146,7 +148,7 @@ class ProfileEditView extends Component {
 
     const profileEditView = (
       <Container>
-        <h3 className="profileView-header">프로필 수정</h3>
+        <h4 className="profileView-header">프로필 수정</h4>
         <Row>
           <Col md="1" />
           <Col md="10" className="profileView-container">
@@ -293,15 +295,18 @@ class ProfileEditView extends Component {
                     />{' '}양발 사용
                   </Label>
                 </FormGroup>
-                <Button
-                  color="primary"
-                  block
-                  outline
-                  onClick={this.handleProfileSave}
-                  className="profile-save-button"
-                >저장하기</Button>
               </Col>
             </Row>
+          </Col>
+          <Col md="1" />
+        </Row>
+        <Row>
+          <Col md="1" />
+          <Col md="10" className="gameRegister-button-box">
+            <button
+              onClick={this.handleProfileSave}
+              className="gameRegister-button"
+            >저장하기</button>
           </Col>
           <Col md="1" />
         </Row>

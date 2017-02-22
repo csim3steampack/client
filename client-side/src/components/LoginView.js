@@ -60,7 +60,7 @@ class LoginView extends Component {
     const userIDInitial = (
       <Form>
         <FormGroup className="auth-input">
-          <Label>User ID</Label>
+          <Label>유저 아이디</Label>
           <Input
             name="id"
             type="text"
@@ -75,7 +75,7 @@ class LoginView extends Component {
     const userIDSuccess = (
       <Form>
         <FormGroup color="success" className="auth-input">
-          <Label>User ID</Label>
+          <Label>유저 아이디</Label>
           <Input
             state="success"
             name="id"
@@ -95,7 +95,7 @@ class LoginView extends Component {
     const pwInitial = (
       <Form>
         <FormGroup className="auth-input">
-          <Label>Password</Label>
+          <Label>비밀번호</Label>
           <Input
             name="password"
             type="password"
@@ -111,7 +111,7 @@ class LoginView extends Component {
     const pwSuccess = (
       <Form>
         <FormGroup color="success" className="auth-input">
-          <Label>Password</Label>
+          <Label>비밀번호</Label>
           <Input
             state="success"
             name="password"
@@ -154,8 +154,8 @@ class LoginView extends Component {
               color="primary"
               className="auth-button"
             >
-				로그인
-			</Button>
+            로그인
+          </Button>
             <Link to="/register">
               <Button color="info" className="auth-button">회원가입</Button>
             </Link>

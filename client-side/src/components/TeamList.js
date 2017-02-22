@@ -32,16 +32,16 @@ class TeamList extends Component {
     const teamDivDisplay = (teamData => teamData.map(team => (
       <Team
         teamData={team}
-        key={team._id}
+        key={team.id}
         handleClick={this.props.handleClick}
         location={this.state.location}
       />
-				)));
+  )));
 
     const searchForm = (
       <div className="home-search-div">
         <div className="search-div">
-          <label>Where</label>
+          <Label>Where</Label>
           <input
             className="place-input"
             type="text"
