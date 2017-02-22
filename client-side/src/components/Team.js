@@ -15,18 +15,18 @@ const defaultProps = {
 class Team extends Component {
   render() {
     const teamDisplay = (
-      teamData => teamData.map(
-        function teamdisplay(team) {
-          const style = {
-            backgroundImage: `url(${team.teamImgUrl})`,
-            backgroundSize: 'cover',
-            overflow: 'hidden',
-          };
+      teamData => teamData.map((team) => {
+        const style = {
+          backgroundImage: `url(${team.teamImgUrl})`,
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+        };
 
-          const color = {
-            color: 'darkgrey',
-          };
+        const color = {
+          color: 'darkgrey',
+        };
 
+        if (team.team === this.props.onSearch || !this.props.onSearch) {
           return (
             <Col md="3" key={team.id} >
               <div className="team-display" style={style}>
@@ -41,9 +41,9 @@ class Team extends Component {
               </div>
             </Col>
           );
-        },
-  ));
-
+        }
+      },
+    ));
     return (
       <Container>
         <Row>

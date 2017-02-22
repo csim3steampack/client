@@ -25,7 +25,7 @@ export function gameRegisterFailure() {
 
 export function gameRegisterRequest(location, date, ground) {
   const userToken = JSON.parse(localStorage.getItem('user_token'));
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/game_register';
+  const url = 'http://sanghoon.org/api/game_register';
   return (dispatch) => {
     dispatch(gameRegister());
     console.log('toke is valid??', userToken);
@@ -54,7 +54,7 @@ export function gameRegisterPhoto() {
 }
 
 export function gameRegisterPhotoRequest(photoData) {
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/team/upload';
+  const url = 'http://sanghoon.org/api/image/team/upload';
   const userToken = localStorage.getItem('user_token');
   const config = {
     headers: {
@@ -92,7 +92,7 @@ export function gameRegisterCheckFailure() {
 }
 
 export function gameRegisterCheckRequest() {
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/game_register/confirm';
+  const url = 'http://sanghoon.org/api/game_register/confirm';
   const userToken = JSON.parse(localStorage.getItem('user_token'));
   return dispatch => axios.post(url, {
     userToken,

@@ -34,7 +34,7 @@ export function profileViewRequest(
   userHeight,
   userFoot) {
   return (dispatch) => {
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/profile';
+    const url = 'http://sanghoon.org/api/profile';
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     dispatch(profileView());
     return axios.post(url, {
@@ -72,7 +72,7 @@ export function profileCheckFailure() {
 }
 
 export function profileCheckRequest() {
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/profile/confirm';
+  const url = 'http://sanghoon.org/api/profile/confirm';
   const userToken = JSON.parse(localStorage.getItem('user_token'));
   return dispatch => axios.post(url, {
     userToken,
@@ -97,7 +97,7 @@ export function profilePhoto() {
 }
 
 export function profilePhotoRequest(photoData) {
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/user/upload';
+  const url = 'http://sanghoon.org/api/image/user/upload';
   const userToken = localStorage.getItem('user_token');
   const config = {
     headers: {

@@ -16,13 +16,21 @@ const defaultProps = {
 class TeamList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      search: '',
+    };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleChange(e) {
     const nextState = {};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
+  }
+
+  handleSearch() {
+    console.log("hi");
   }
 
   render() {
@@ -51,7 +59,7 @@ class TeamList extends Component {
                 />
               </Col>
               <Col md="2">
-                <button className="teamlist-button">검색</button>
+                <button className="teamlist-button" onClick={this.handleSearch}>검색</button>
               </Col>
             </Row>
           </Col>
@@ -66,6 +74,7 @@ class TeamList extends Component {
         <Team
           handleClick={this.props.handleClick}
           teamData={this.props.teamData}
+          onSearch={this.state.search}
         />
       </div>
     );
