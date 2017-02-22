@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { GameRegisterEditView } from '../components';
 
-const propTypes = {
-
-};
 
 class GameRegisterEdit extends Component {
   render() {
@@ -15,6 +12,5 @@ class GameRegisterEdit extends Component {
   }
 }
 
-GameRegisterEdit.propTypes = propTypes;
 
 export default GameRegisterEdit;

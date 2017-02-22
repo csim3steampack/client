@@ -9,14 +9,16 @@ const propTypes = {
   router: React.PropTypes.any,
 };
 
+const defaultProps = {
+  loginRequest: () => console.log('loginRequest function is not a defined'),
+  status: undefined,
+  router: undefined,
+};
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-  }
-
-  componentDidMount() {
-    console.log("LOGIN didmount");
   }
 
   handleLogin(id, password) {
@@ -48,5 +50,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Login.propTypes = propTypes;
+Login.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -6,6 +6,11 @@ const propTypes = {
   errorCode: React.PropTypes.number,
 };
 
+const defaultProps = {
+  onRegister: () => console.log('onRegister function is not a defined'),
+  errorCode: -1,
+};
+
 class RegisterView extends Component {
   constructor(props) {
     super(props);
@@ -189,5 +194,7 @@ class RegisterView extends Component {
 }
 
 RegisterView.propTypes = propTypes;
+RegisterView.defaultProps = defaultProps;
+
 
 export default RegisterView;

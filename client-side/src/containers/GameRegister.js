@@ -9,15 +9,17 @@ const propTypes = {
   router: React.PropTypes.any,
 };
 
+const defaultProps = {
+  gameRegisterRequest: () => console.log('gameRegisterRequest function is not a defined'),
+  isSucceed: false,
+  router: undefined,
+};
+
 
 class GameRegister extends Component {
   constructor(props) {
     super(props);
     this.handleGameRegister = this.handleGameRegister.bind(this);
-  }
-
-  componentDidMount() {
-    console.log("GAMEREGISTER didmount")
   }
 
   handleGameRegister(location, date, ground) {
@@ -45,9 +47,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  gameRegisterRequest: (location, date, ground) => dispatch(gameRegisterRequest(location, date, ground)),
+  gameRegisterRequest: (location, date, ground) =>
+    dispatch(gameRegisterRequest(location, date, ground)),
 });
 
 GameRegister.propTypes = propTypes;
+GameRegister.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameRegister);

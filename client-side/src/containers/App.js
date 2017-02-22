@@ -14,6 +14,15 @@ const propTypes = {
   currentUserID: React.PropTypes.string,
 };
 
+const defaultProps = {
+  children: undefined,
+  getStatusRequest: () => console.log('getStatusRequest function is not a defined'),
+  router: undefined,
+  logoutRequest: () => console.log('logoutRequest function is not a defined'),
+  isSucceed: true,
+  currentUserID: undefined,
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +30,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    console.log("APP willmount");
+    console.log('APP willmount');
     const userToken = JSON.parse(localStorage.getItem('user_token'));
     if (userToken) {
       this.props.getStatusRequest();
@@ -67,5 +76,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 App.propTypes = propTypes;
+App.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -3,9 +3,13 @@ import { Link } from 'react-router';
 import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 const propTypes = {
-  isLoggedIn: React.PropTypes.bool,
   onLogout: React.PropTypes.func,
   isSucceed: React.PropTypes.bool,
+};
+
+const defaultProps = {
+  onLogout: () => console.log('onLogout is not a defined'),
+  isSucceed: false,
 };
 
 
@@ -38,5 +42,6 @@ class Header extends Component {
 }
 
 Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

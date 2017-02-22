@@ -11,7 +11,16 @@ const propTypes = {
   currentUsername: React.PropTypes.string,
   allProfileData: React.PropTypes.object,
   profilePhotoRequest: React.PropTypes.func,
-  profilePhotoStatus: React.PropTypes.string,
+};
+
+const defaultProps = {
+  profileViewRequest: () => console.log('profileViewRequest function is not a defined'),
+  status: undefined,
+  profileCheckRequest: () => console.log('profileCheckRequest function is not a defined'),
+  currentUsername: undefined,
+  allProfileData: {},
+  profilePhotoRequest: () => console.log('profilePhotoRequest function is not a defined'),
+  profilePhotoStatus: undefined,
 };
 
 class Profile extends Component {
@@ -22,7 +31,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    console.log("PROFILE didmount")
     this.props.profileCheckRequest();
   }
 
@@ -37,8 +45,8 @@ class Profile extends Component {
       });
   }
 
-  handleProfilePhoto(photoUrl) {
-    this.props.profilePhotoRequest(photoUrl);
+  handleProfilePhoto(photoData) {
+    this.props.profilePhotoRequest(photoData);
   }
 
   render() {
@@ -63,7 +71,6 @@ const mapStateToProps = state => ({
   status: state.profile.status,
   currentUsername: state.profile.currentUsername,
   allProfileData: state.profile.allProfileData,
-  profilePhotoStatus: state.profile.profilePhotoStatus,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -74,5 +81,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Profile.propTypes = propTypes;
+Profile.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

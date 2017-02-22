@@ -11,6 +11,14 @@ const propTypes = {
   errorCode: React.PropTypes.number,
 };
 
+const defaultProps = {
+  registerRequest: () => console.log('registerRequest function is not a defined'),
+  status: undefined,
+  router: undefined,
+  allProfileData: {},
+  errorCode: -1,
+};
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +26,6 @@ class Register extends Component {
       registerErrorCode: -1,
     };
     this.handleRegister = this.handleRegister.bind(this);
-  }
-
-  componentDidMount() {
-    console.log("REGISTER didmount");
   }
 
   handleRegister(id, password) {
@@ -58,5 +62,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Register.propTypes = propTypes;
+Register.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

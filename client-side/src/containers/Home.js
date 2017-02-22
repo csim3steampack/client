@@ -9,9 +9,14 @@ const propTypes = {
   groundViewTeamName: React.PropTypes.func,
 };
 
+const defaultProps = {
+  leaderTeamData: [],
+  teamViewRequest: () => console.log('teamViewRequest function is not a defined'),
+  groundViewTeamName: () => console.log('groundViewTeamName function is not a defined'),
+};
+
 class Home extends Component {
   componentDidMount() {
-    console.log("HOME didmount")
     this.props.teamViewRequest();
   }
 
@@ -37,5 +42,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Home.propTypes = propTypes;
+Home.defaultProps = defaultProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

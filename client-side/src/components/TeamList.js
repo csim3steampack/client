@@ -7,6 +7,11 @@ const propTypes = {
   handleClick: React.PropTypes.func,
 };
 
+const defaultProps = {
+  teamData: [],
+  handleClick: () => console.log('handleClick function is not a defined'),
+};
+
 
 class TeamList extends Component {
   constructor(props) {
@@ -68,5 +73,6 @@ class TeamList extends Component {
 }
 
 TeamList.propTypes = propTypes;
+TeamList.defaultProps = defaultProps;
 
 export default TeamList;
