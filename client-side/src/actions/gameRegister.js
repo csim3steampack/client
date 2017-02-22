@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { GAME_REGISTER, GAME_REGISTER_SUCCESS, GAME_REGISTER_PHOTO } from './ActionTypes';
+import { GAME_REGISTER, GAME_REGISTER_SUCCESS, GAME_REGISTER_FAILURE, GAME_REGISTER_PHOTO,
+         GAME_REGISTER_CHECK_SUCCESS, GAME_REGISTER_CHECK_FAILURE } from './ActionTypes';
 
 const localStorage = window.localStorage;
 
@@ -10,10 +11,15 @@ export function gameRegister() {
   };
 }
 
-export function gameRegisterSuccess(bool) {
+export function gameRegisterSuccess() {
   return {
     type: GAME_REGISTER_SUCCESS,
-    bool,
+  };
+}
+
+export function gameRegisterFailure() {
+  return {
+    type: GAME_REGISTER_FAILURE,
   };
 }
 
@@ -30,13 +36,15 @@ export function gameRegisterRequest(location, date, ground) {
         userToken,
       }).then((response) => {
         console.log('game response check', response);
-        dispatch(gameRegisterSuccess(response.data.success));
+        dispatch(gameRegisterSuccess());
       })
     .catch((error) => {
       console.log('ERROR@', error.response);
+      dispatch(gameRegisterFailure());
     });
   };
 }
+
 
 /* GAME REGISTER PHOTO SECTION */
 export function gameRegisterPhoto() {
@@ -44,7 +52,6 @@ export function gameRegisterPhoto() {
     type: GAME_REGISTER_PHOTO,
   };
 }
-
 
 export function gameRegisterPhotoRequest(photoData) {
   const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/image/team/upload';
@@ -55,7 +62,6 @@ export function gameRegisterPhotoRequest(photoData) {
       userToken,
     },
   };
-
   return (dispatch) => {
     return axios.post(url, photoData, config).then((response) => {
       if (response.status === 200) {
@@ -67,4 +73,38 @@ export function gameRegisterPhotoRequest(photoData) {
       console.log('gameRegister Error@', error.response);
     });
   };
+}
+
+
+/* GAME REGISTER CHECK SECTION */
+export function gameRegisterCheckSuccess(playPlace, allGameRegisterData) {
+  return {
+    type: GAME_REGISTER_CHECK_SUCCESS,
+    playPlace,
+    allGameRegisterData,
+  };
+}
+
+export function gameRegisterCheckFailure() {
+  return {
+    type: GAME_REGISTER_CHECK_FAILURE,
+  };
+}
+
+export function gameRegisterCheckRequest() {
+  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/game_register/confirm';
+  const userToken = JSON.parse(localStorage.getItem('user_token'));
+  return dispatch => axios.post(url, {
+    userToken,
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log('gameRegisterCheck response', response.data.data);
+        dispatch(gameRegisterCheckSuccess(response.data.data.place, response.data.data));
+      }
+    })
+    .catch((error) => {
+      console.log('gameRegister check error@', error.response);
+      dispatch(gameRegisterCheckFailure());
+    });
 }

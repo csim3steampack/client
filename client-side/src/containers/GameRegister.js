@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GameRegisterView } from '../components';
-import { gameRegisterRequest, gameRegisterPhotoRequest } from '../actions/gameRegister';
+import { gameRegisterRequest, gameRegisterPhotoRequest, gameRegisterCheckRequest } from '../actions/gameRegister';
 
 const propTypes = {
   gameRegisterRequest: React.PropTypes.func,
-  isSucceed: React.PropTypes.bool,
-  router: React.PropTypes.any,
+  status: React.PropTypes.string,
   gameRegisterPhotoRequest: React.PropTypes.func,
+  playPlace: React.PropTypes.string,
+  allGameRegisterData: React.PropTypes.object,
+  gameRegisterCheckRequest: React.PropTypes.func,
 };
 
 const defaultProps = {
   gameRegisterRequest: () => console.log('gameRegisterRequest function is not a defined'),
-  isSucceed: false,
-  router: undefined,
+  status: undefined,
   gameRegisterPhotoRequest: () => console.log('gameRegisterPhotoRequest function is not a defined'),
+  playPlace: undefined,
+  allGameRegisterData: {},
+  gameRegisterCheckRequest: () => console.log('gameRegisterCheckRequest function is not a defined'),
 };
 
 
@@ -25,6 +29,10 @@ class GameRegister extends Component {
     this.onGameRegisterPhoto = this.onGameRegisterPhoto.bind(this);
   }
 
+  componentDidMount() {
+    this.props.gameRegisterCheckRequest();
+  }
+
   onGameRegisterPhoto(photoData) {
     this.props.gameRegisterPhotoRequest(photoData);
   }
@@ -32,8 +40,8 @@ class GameRegister extends Component {
   handleGameRegister(location, date, ground) {
     return this.props.gameRegisterRequest(location, date, ground)
     .then(() => {
-      if (this.props.isSucceed) {
-        this.props.router.push('/');
+      if (this.props.status === 'SUCCESS') {
+        this.props.gameRegisterCheckRequest();
         return true;
       }
       return false;
@@ -46,6 +54,8 @@ class GameRegister extends Component {
         <GameRegisterView
           onGameRegister={this.handleGameRegister}
           onGameRegisterPhoto={this.onGameRegisterPhoto}
+          playPlace={this.props.playPlace}
+          allGameRegisterData={this.props.allGameRegisterData}
         />
       </div>
     );
@@ -53,13 +63,16 @@ class GameRegister extends Component {
 }
 
 const mapStateToProps = state => ({
-  isSucceed: state.gameRegister.isSucceed,
+  status: state.gameRegister.status,
+  playPlace: state.gameRegister.playPlace,
+  allGameRegisterData: state.gameRegister.allGameRegisterData,
 });
 
 const mapDispatchToProps = dispatch => ({
   gameRegisterRequest: (location, date, ground) =>
     dispatch(gameRegisterRequest(location, date, ground)),
   gameRegisterPhotoRequest: photoData => dispatch(gameRegisterPhotoRequest(photoData)),
+  gameRegisterCheckRequest: () => dispatch(gameRegisterCheckRequest()),
 });
 
 GameRegister.propTypes = propTypes;
