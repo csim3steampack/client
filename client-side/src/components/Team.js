@@ -3,36 +3,51 @@ import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router';
 
 const propTypes = {
-  teamData: React.PropTypes.object,
+  teamData: React.PropTypes.array,
   handleClick: React.PropTypes.func,
 };
 
 const defaultProps = {
-  teamData: {},
+  teamData: [],
   handleClick: () => console.log('handleClick function is not a defined'),
 };
 
 class Team extends Component {
   render() {
-    // const teamFilter = (
-    //   if (this.props.location === this.props.teamData.location) {
-    //
-    //   }
-    // );
+    const teamDisplay = (
+      teamData => teamData.map((team) => {
+        const style = {
+          backgroundImage: `url(${team.teamImgUrl})`,
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+        };
 
+        const color = {
+          color: 'darkgrey',
+        };
+
+        if (team.team === this.props.onSearch || !this.props.onSearch) {
+          return (
+            <Col md="3" key={team.id} >
+              <div className="team-display" style={style}>
+                <Link
+                  to="/ground_display"
+                  style={color}
+                  className="teamview-link"
+                  onClick={() => this.props.handleClick(team.team)}
+                >
+                  {team.team}
+                </Link>
+              </div>
+            </Col>
+          );
+        }
+      },
+    ));
     return (
       <Container>
         <Row>
-          <Col >
-            <div className="team-select">
-              <Link
-                to="/ground_display"
-                onClick={() => this.props.handleClick(this.props.teamData.team)}
-              >
-                {this.props.teamData.team}
-              </Link>
-            </div>
-          </Col>
+          {teamDisplay(this.props.teamData)}
         </Row>
       </Container>
     );

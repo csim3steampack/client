@@ -8,6 +8,7 @@
 	font-family: BMDOHYEON, Ubuntu, Dosis, serif;
 }
 
+
 /**********************************
 				HEADER SECTIOM
 ***********************************/
@@ -58,43 +59,63 @@ margin-top: 1em;
 /**********************************
 			TEAM SECTIOM
 ***********************************/
-.team-select {
-	border: 1px solid black;
-	height: 60px;
-	width: 250px;
+.team-display {
+	border: 2px solid lightgrey;
+	border-radius: 10px;
+	height: 13em;
+	width: 100%;
 	text-align: center;
+	line-height: 13em;
+	margin-bottom: 3em;
+	font-size: 1em;
+	color: grey;
 }
+
+.team-display:hover {
+	opacity: 0.7;
+}
+
 
 /**********************************
 			TEAMLIST SECTIOM
 ***********************************/
 
 .home-search-div {
-	border: 1px solid black;
-	height: 5em;
-	width: 70%;
-	margin: auto;
+	border: 1px solid lightgrey;
+	border-radius: 5px;
+	margin: 2em auto;
 	text-align: left;
-	display: flex;
+	margin-bottom: 4em;
 }
 
-.search-div {
-	border: 1px solid red;
-	width: 45%;
+.teamview-link {
+	display: block;
 }
 
 .place-input {
-	width: 100%;
 	height: 2.5em;
+	margin-bottom: 1em;
 }
 
-.calendar-div {
-	border: 1px solid red;
-	width: 45%;
+.teamlist-button {
+	font-family: BMDOHYEON;
+	background-color: #ff9999;
+	border-radius: 5px;
+	outline-style: none;
+	border: none;
+	width: 90%;
+	height: 3.5em;
+	margin: 1.5em auto 0;
+	display: block;
+	line-height: 3em;
 }
 
-.button-div {
-	width: 10%;
+.search-div {
+	border-right: 1px solid lightgrey;
+}
+
+.search-label {
+	margin-top: .7em;
 }
 
 /**********************************
@@ -141,8 +162,9 @@ margin-top: 1em;
 ***********************************/
 
 .gameRegister-container {
-	border: 2px solid #cccccc;
+	border: 3px solid #cccccc;
 	padding-bottom: 0.8em;
+	border-radius: 7px 7px 0 0;
 }
 
 .gameRegister-title {
@@ -154,6 +176,7 @@ margin-top: 1em;
 .gameRegister-button-box {
 	background-color: lightgrey;
 	height: 5em;
+	border-radius: 0 0 7px 7px;
 }
 
 .gameRegister-button {
@@ -193,6 +216,7 @@ margin-top: 1em;
 
 .profileView-container {
 	border: 2px solid #cccccc;
+	border-radius: 7px 7px 0 0;
 }
 
 .profile-insideContainer {
@@ -241,6 +265,7 @@ input[type=file] {
 
 .profile-input {
 	border: 1px solid red;
+	font-family: BMDOHYEON;
 }
 
 .profile-save-button {

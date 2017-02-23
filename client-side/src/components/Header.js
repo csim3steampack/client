@@ -15,9 +15,6 @@ const defaultProps = {
 
 class Header extends Component {
   render() {
-    const gameRegisterLink = <NavLink tag={Link} to="/game_register">경기등록</NavLink>;
-    const gameRegisterEditLink = <NavLink tag={Link} to="/game_register/edit">경기수정</NavLink>;
-
     return (
       <div>
         <Container fluid>
@@ -28,7 +25,7 @@ class Header extends Component {
                 <NavLink tag={Link} to="/profile">프로필</NavLink>
               </NavItem>
               <NavItem>
-                {this.props.isSucceed ? gameRegisterEditLink : gameRegisterLink}
+                <NavLink tag={Link} to="/game_register">{this.props.isSucceed ? '경기관리' : '경기등록'}</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={this.props.onLogout} tag={Link} to="/login">로그아웃</NavLink>

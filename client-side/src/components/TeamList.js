@@ -1,4 +1,4 @@
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Label, Input, Container, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import Team from './Team';
 
@@ -17,9 +17,10 @@ class TeamList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: '',
+      search: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleChange(e) {
@@ -28,45 +29,53 @@ class TeamList extends Component {
     this.setState(nextState);
   }
 
-  render() {
-    const teamDivDisplay = (teamData => teamData.map(team => (
-      <Team
-        teamData={team}
-        key={team.id}
-        handleClick={this.props.handleClick}
-        location={this.state.location}
-      />
-  )));
+  handleSearch() {
+    console.log("hi");
+  }
 
+  render() {
     const searchForm = (
-      <div className="home-search-div">
-        <div className="search-div">
-          <Label>Where</Label>
-          <input
-            className="place-input"
-            type="text"
-            name="search"
-            placeholder="City, Playground"
-            onChange={this.handleChange}
-          />
-        </div>
-        <Form className="calendar-div">
-          <FormGroup>
-            <Label for="exampleDate">Date</Label>
-            <Input
-              type="date"
-              name="date"
-            />
-          </FormGroup>
-        </Form>
-        <button className="button-div">Search</button>
-      </div>
+      <Container>
+        <Row>
+          <Col md="1" />
+          <Col md="10" className="home-search-div">
+            <Row>
+              <Col md="5" className="search-div">
+                <Label className="search-label">경기장소 선택</Label>
+                <Input
+                  className="place-input"
+                  type="text"
+                  name="search"
+                  placeholder="경기장소(ex. 영등포구)"
+                  onChange={this.handleChange}
+                />
+              </Col>
+              <Col md="5">
+                <Label className="search-label">경기날짜 선택</Label>
+                <Input
+                  type="date"
+                  name="date"
+                  className="place-input"
+                />
+              </Col>
+              <Col md="2">
+                <button className="teamlist-button" onClick={this.handleSearch}>검색</button>
+              </Col>
+            </Row>
+          </Col>
+          <Col md="1" />
+        </Row>
+      </Container>
     );
 
     return (
       <div>
         {searchForm}
-        {teamDivDisplay(this.props.teamData)}
+        <Team
+          handleClick={this.props.handleClick}
+          teamData={this.props.teamData}
+          onSearch={this.state.search}
+        />
       </div>
     );
   }

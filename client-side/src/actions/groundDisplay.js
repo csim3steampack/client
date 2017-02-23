@@ -24,7 +24,7 @@ export function groundDisplayFailure() {
 
 export function groundDisplayRequest(awayTeam) {
   const userToken = JSON.parse(localStorage.getItem('user_token'));
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/ground_display';
+  const url = 'http://sanghoon.org/api/ground_display';
   return (dispatch) => {
     dispatch(groundDisplay());
     return axios.post(url, {

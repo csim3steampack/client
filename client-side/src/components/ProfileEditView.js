@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Input, Label, FormGroup } from 'reactstrap';
+import { Container, Row, Col, Input, Label, FormGroup } from 'reactstrap';
 
 const propTypes = {
   allProfileData: React.PropTypes.object,

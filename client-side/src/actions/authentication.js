@@ -29,7 +29,8 @@ export function loginFailure() {
 export function loginRequest(id, password) {
   return (dispatch) => {
     dispatch(login());
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/login';
+    const url = 'http://sanghoon.org/api/account/login';
+
     return axios.post(url, { id, password })
     .then((response) => {
       if (response.status === 200) {
@@ -68,7 +69,7 @@ export function registerFailure(error) {
 export function registerRequest(id, password) {
   return (dispatch) => {
     dispatch(register());
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/signup';
+    const url = 'http://sanghoon.org/api/account/signup';
     return axios.post(url, { id, password })
     .then(() => {
       dispatch(registerSuccess());
@@ -88,7 +89,7 @@ export function logout() {
 
 export function logoutRequest() {
   return (dispatch) => {
-    const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/logout';
+    const url = 'http://sanghoon.org/api/account/logout';
     return axios.post(url)
     .then(() => {
       localStorage.removeItem('user_token');
@@ -119,7 +120,7 @@ export function getStatusFailure() {
 
 export function getStatusRequest() {
   const userToken = JSON.parse(localStorage.getItem('user_token'));
-  const url = 'http://ec2-52-78-89-87.ap-northeast-2.compute.amazonaws.com:3000/api/account/getinfo';
+  const url = 'http://sanghoon.org/api/account/getinfo';
   return (dispatch) => {
     dispatch(getStatus());
     console.log('token id checking', userToken);

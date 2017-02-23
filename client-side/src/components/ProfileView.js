@@ -238,8 +238,6 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <Button
-                  color="primary"
-                  block
                   onClick={this.handleProfile}
                   className="profile-save-button"
                 >저장하기</Button>
