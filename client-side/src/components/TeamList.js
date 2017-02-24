@@ -18,6 +18,7 @@ class TeamList extends Component {
     super(props);
     this.state = {
       search: '',
+      date: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -30,7 +31,7 @@ class TeamList extends Component {
   }
 
   handleSearch() {
-    console.log("hi");
+    console.log("hi", this.state.date);
   }
 
   render() {
@@ -43,7 +44,7 @@ class TeamList extends Component {
               <Col md="5" className="search-div">
                 <Label className="search-label">경기장소 선택</Label>
                 <Input
-                  className="place-input"
+                  className="place-input profile-result"
                   type="text"
                   name="search"
                   placeholder="경기장소(ex. 영등포구)"
@@ -55,7 +56,8 @@ class TeamList extends Component {
                 <Input
                   type="date"
                   name="date"
-                  className="place-input"
+                  className="place-input profile-result"
+                  onChange={this.handleChange}
                 />
               </Col>
               <Col md="2">
@@ -75,6 +77,7 @@ class TeamList extends Component {
           handleClick={this.props.handleClick}
           teamData={this.props.teamData}
           onSearch={this.state.search}
+          onDate={this.state.date}
         />
       </div>
     );

@@ -112,6 +112,7 @@ class GameRegisterView extends Component {
                 value={this.state.location}
                 onChange={this.handleChange}
                 placeholder='"구"를 입력해 주세요'
+                className="profile-result"
               />
             </FormGroup>
             <FormGroup>
@@ -121,6 +122,7 @@ class GameRegisterView extends Component {
                 type="date"
                 value={this.state.date}
                 onChange={this.handleChange}
+                className="profile-result"
               />
             </FormGroup>
             <Label className="gameRegister-title">팀 사진</Label>
@@ -140,6 +142,7 @@ class GameRegisterView extends Component {
                 type="text"
                 value={this.state.ground}
                 onChange={this.handleChange}
+                className="profile-result"
               />
             </FormGroup>
           </Col>
@@ -158,7 +161,6 @@ class GameRegisterView extends Component {
       </Container>
     );
 
-
     /* GAME REGISTER CHECK VIEW SECTION */
     const gameRegisterCheckView = (
       <Container>
@@ -167,10 +169,10 @@ class GameRegisterView extends Component {
           <Col sm="3" />
           <Col sm="6" className="gameRegister-container">
             <Label className="gameRegister-title">경기장소</Label>
-            <div>{allGameRegisterData.place}</div>
+            <div className="gameRegister-result">{allGameRegisterData.place}</div>
 
             <Label className="gameRegister-title">경기날짜</Label>
-            <div>{allGameRegisterData.playdate}</div>
+            <div className="gameRegister-result">{allGameRegisterData.playdate}</div>
 
             <Label className="gameRegister-title">팀 사진</Label>
             <div className="registerImgPreview">
@@ -178,7 +180,7 @@ class GameRegisterView extends Component {
             </div>
 
             <Label className="gameRegister-title">경기 운동장</Label>
-            <div>{allGameRegisterData.playground}</div>
+            <div className="gameRegister-result">{allGameRegisterData.playground}</div>
           </Col>
           <Col sm="3" />
         </Row>
