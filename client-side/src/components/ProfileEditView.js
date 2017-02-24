@@ -98,29 +98,45 @@ class ProfileEditView extends Component {
                 </div>
 
                 <div className="profileCheckView-title">사용자 이름</div>
-                <div>{profileAlldata.username}</div>
+                <div className="profile-result">{profileAlldata.username}</div>
 
                 <div className="profileCheckView-title">팀 이름</div>
-                <div>{profileAlldata.team}</div>
+                <div className="profile-result">{profileAlldata.team}</div>
               </Col>
 
               <Col md="6" className="profile-insideContainer">
                 <div className="profileCheckView-title">키(cm)</div>
-                <div>{profileAlldata.height}CM</div>
+                <div className="profile-result">{profileAlldata.height}CM</div>
 
                 <div className="profileCheckView-title">포지션</div>
-                <div>{profileAlldata.position === 'FW' ? '공격수' : undefined}</div>
-                <div>{profileAlldata.position === 'MF' ? '미드필더' : undefined}</div>
-                <div>{profileAlldata.position === 'DF' ? '수비수' : undefined}</div>
-                <div>{profileAlldata.position === 'GK' ? '골키퍼' : undefined}</div>
+                <div className="profile-result">
+                  {profileAlldata.position === 'FW' ? '공격수' : undefined}
+                </div>
+                <div className="profile-result">
+                  {profileAlldata.position === 'MF' ? '미드필더' : undefined}
+                </div>
+                <div className="profile-result">
+                  {profileAlldata.position === 'DF' ? '수비수' : undefined}
+                </div>
+                <div className="profile-result">
+                  {profileAlldata.position === 'GK' ? '골키퍼' : undefined}
+                </div>
 
                 <div className="profileCheckView-title">리더 여부</div>
-                <div>{profileAlldata.leader === '1' ? '팀 리더' : '멤버'}</div>
+                <div className="profile-result">
+                  {profileAlldata.leader === '1' ? '팀 리더' : '멤버'}
+                </div>
 
                 <div className="profileCheckView-title">주 사용발</div>
-                <div>{profileAlldata.foot === 'right' ? '오른발' : undefined}</div>
-                <div>{profileAlldata.foot === 'left' ? '왼발' : undefined}</div>
-                <div>{profileAlldata.foot === 'both' ? '양발 사용' : undefined}</div>
+                <div className="profile-result">
+                  {profileAlldata.foot === 'right' ? '오른발' : undefined}
+                </div>
+                <div className="profile-result">
+                  {profileAlldata.foot === 'left' ? '왼발' : undefined}
+                </div>
+                <div className="profile-result">
+                  {profileAlldata.foot === 'both' ? '양발 사용' : undefined}
+                </div>
               </Col>
             </Row>
           </Col>
@@ -169,7 +185,7 @@ class ProfileEditView extends Component {
                   type="text"
                   value={this.state.name}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
 
                 <div className="profile-title">팀 이름</div>
@@ -178,7 +194,7 @@ class ProfileEditView extends Component {
                   type="text"
                   value={this.state.teamName}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
 
                 <div className="profile-title">키(cm)</div>
@@ -187,14 +203,14 @@ class ProfileEditView extends Component {
                   type="text"
                   value={this.state.height}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
               </Col>
 
               <Col md="6" className="profile-insideContainer">
                 <div className="profile-title">포지션</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -205,7 +221,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -216,7 +232,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -227,7 +243,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -239,7 +255,7 @@ class ProfileEditView extends Component {
                 </FormGroup>
                 <div className="profile-title">리더 여부</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="leaderState"
                       type="radio"
@@ -250,7 +266,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="leaderState"
                       type="radio"
@@ -263,7 +279,7 @@ class ProfileEditView extends Component {
 
                 <div className="profile-title">주 사용발</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"
@@ -274,7 +290,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"
@@ -285,7 +301,7 @@ class ProfileEditView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"

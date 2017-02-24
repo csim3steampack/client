@@ -5,15 +5,20 @@ import { Link } from 'react-router';
 const propTypes = {
   teamData: React.PropTypes.array,
   handleClick: React.PropTypes.func,
+  onSearch: React.PropTypes.any,
+  onDate: React.PropTypes.any,
 };
 
 const defaultProps = {
   teamData: [],
   handleClick: () => console.log('handleClick function is not a defined'),
+  onSearch: undefined,
+  onDate: undefined,
 };
 
 class Team extends Component {
   render() {
+
     const teamDisplay = (
       teamData => teamData.map((team) => {
         const style = {
@@ -26,19 +31,22 @@ class Team extends Component {
           color: 'darkgrey',
         };
 
-        if (team.team === this.props.onSearch || !this.props.onSearch) {
+        if (
+          (!this.props.onSearch && !this.props.onDate) ||
+            team.place.indexOf(this.props.onSearch) !== -1 ||
+            team.playdate === this.props.onDate
+          ) {
           return (
             <Col md="3" key={team.id} >
-              <div className="team-display" style={style}>
-                <Link
-                  to="/ground_display"
-                  style={color}
-                  className="teamview-link"
-                  onClick={() => this.props.handleClick(team.team)}
-                >
-                  {team.team}
-                </Link>
-              </div>
+              <Link
+                to="/ground_display"
+                style={color}
+                className="teamview-link"
+                onClick={() => this.props.handleClick(team.team)}
+              >
+                <div className="team-display" style={style} />
+              </Link>
+              <div className="team-name">{team.team}</div>
             </Col>
           );
         }

@@ -111,7 +111,7 @@ class ProfileView extends Component {
                   type="text"
                   value={this.state.name}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
 
                 <div className="profile-title">팀 이름</div>
@@ -120,7 +120,7 @@ class ProfileView extends Component {
                   type="text"
                   value={this.state.teamName}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
 
                 <div className="profile-title">키(cm)</div>
@@ -129,14 +129,14 @@ class ProfileView extends Component {
                   type="text"
                   value={this.state.height}
                   onChange={this.handleChange}
-                  className="profile-input"
+                  className="profile-result"
                 />
               </Col>
 
               <Col md="6" className="profile-insideContainer">
                 <div className="profile-title">포지션</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -147,7 +147,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -158,7 +158,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -169,7 +169,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="position"
                       type="radio"
@@ -181,7 +181,7 @@ class ProfileView extends Component {
                 </FormGroup>
                 <div className="profile-title">리더 여부</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="leaderState"
                       type="radio"
@@ -192,7 +192,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="leaderState"
                       type="radio"
@@ -205,7 +205,7 @@ class ProfileView extends Component {
 
                 <div className="profile-title">주 사용발</div>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"
@@ -216,7 +216,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"
@@ -227,7 +227,7 @@ class ProfileView extends Component {
                   </Label>
                 </FormGroup>
                 <FormGroup check>
-                  <Label check>
+                  <Label check className="profile-result">
                     <Input
                       name="foot"
                       type="radio"
@@ -237,12 +237,18 @@ class ProfileView extends Component {
                     />{' '}양발 사용
                   </Label>
                 </FormGroup>
-                <Button
-                  onClick={this.handleProfile}
-                  className="profile-save-button"
-                >저장하기</Button>
               </Col>
             </Row>
+          </Col>
+          <Col md="1" />
+        </Row>
+        <Row>
+          <Col md="1" />
+          <Col md="10" className="gameRegister-button-box">
+            <button
+              onClick={this.handleProfile}
+              className="gameRegister-button"
+            >저장하기</button>
           </Col>
           <Col md="1" />
         </Row>

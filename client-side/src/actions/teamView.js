@@ -22,10 +22,13 @@ export function teamViewFailure() {
 }
 
 export function teamViewRequest() {
+  const userToken = JSON.parse(localStorage.getItem('user_token'));
+  const url = 'http://sanghoon.org/api/home';
   return (dispatch) => {
     dispatch(teamView());
-    const url = 'http://sanghoon.org/api/home';
-    return axios.get(url).then((response) => {
+    return axios.post(url, {
+      userToken,
+    }).then((response) => {
       console.log("teamview data is ", response.data)
       dispatch(teamViewSuccess(response.data));
     })

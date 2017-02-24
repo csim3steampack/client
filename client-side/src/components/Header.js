@@ -18,7 +18,7 @@ class Header extends Component {
     return (
       <div>
         <Container fluid>
-          <Navbar color="faded" light toggleable>
+          <Navbar light toggleable className="header-div">
             <NavbarBrand tag={Link} to="/">STEAMPACK</NavbarBrand>
             <Nav className="ml-auto" navbar>
               <NavItem>

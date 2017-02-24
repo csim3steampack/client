@@ -5,20 +5,19 @@ import { groundDisplayRequest } from '../actions/groundDisplay';
 
 const propTypes = {
   groundDisplayRequest: React.PropTypes.func,
-  teamPlayerName: React.PropTypes.string,
+  selectedTeam: React.PropTypes.string,
   allDisplayTeam: React.PropTypes.object,
 };
 
 const defaultProps = {
   groundDisplayRequest: () => console.log('groundDisplayRequest function is not a defined'),
-  teamPlayerName: undefined,
+  selectedTeam: undefined,
   allDisplayTeam: {},
 };
 
 class GroundDisplay extends Component {
-
-  componentDidMount() {
-    this.props.groundDisplayRequest(this.props.teamPlayerName);
+  componentWillMount() {
+    this.props.groundDisplayRequest(this.props.selectedTeam);
   }
 
   render() {
@@ -32,7 +31,7 @@ class GroundDisplay extends Component {
 
 const mapStateToProps = state => ({
   allDisplayTeam: state.groundDisplay.displayTeamData,
-  teamPlayerName: state.teamView.teamNameValue,
+  selectedTeam: state.teamView.teamNameValue,
 });
 
 const mapDispatchToProps = dispatch => ({
