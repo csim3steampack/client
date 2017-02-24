@@ -161,6 +161,7 @@
 	position: absolute;
 	border-radius: 100%;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .away-player {
@@ -172,6 +173,7 @@
 	position: absolute;
 	border-radius: 100%;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .home-player {
@@ -183,6 +185,7 @@
 	position: absolute;
 	border-radius: 100%;
 	background-size: cover;
+	cursor: pointer;
 }
 
 .submember-div {
@@ -444,5 +447,39 @@ input[type=file] {
 
 .profile-result {
 	font-family: BMJUA;
+	font-size: 1.1em;
+}
+
+
+/**********************************
+			MODAL SECTIOM
+***********************************/
+
+.modal-body {
+  height: 100%;
+  vertical-align: middle;
+	overflow-y: auto;
+	position: absolute;
+}
+
+.modal-image {
+	height: 13em;
+	width: 13em;
+	background-size: cover;
+	margin: auto;
+	border-radius: 5px;
+
+}
+
+.modal-title {
+	font-size: 1.2em;
+	/*margin-bottom: 1em;*/
+}
+
+.modal-info {
+	color: grey;
+	margin-top: .3em;
+	margin-bottom: 1em;
+	font-family: 'BMJUA';
 	font-size: 1.1em;
 }
