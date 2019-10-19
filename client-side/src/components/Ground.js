@@ -66,6 +66,7 @@ class Ground extends Component {
           <div
             className="homesub-player"
             style={{ backgroundImage: `url(${member.userImgUrl})` }}
+            onClick={() => this.onMemberModal(homeFW ? member.username : false)}
           />
           <div className="sub-player-section">{homeFW ? member.username : false}</div>
         </div>,
@@ -94,6 +95,7 @@ class Ground extends Component {
           <div
             className="awaysub-player"
             style={{ backgroundImage: `url(${member.userImgUrl})` }}
+            onClick={() => this.onMemberModal(awayFW ? member.username : false)}
           />
           <div className="sub-player-section">{awayFW ? member.username : false}</div>
         </div>,
